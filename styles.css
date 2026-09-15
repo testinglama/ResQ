@@ -115,8 +115,8 @@ button {
   background-color: var(--nav-pill-bg);
   border: 1px solid rgba(255, 85, 0, 0.15);
   border-radius: var(--radius-pill);
-  padding: 8px 10px 8px 24px;
-  gap: 40px;
+  padding: 8px 12px 8px 24px;
+  gap: 28px;
   box-shadow: 0 4px 20px rgba(255, 85, 0, 0.05);
   transition: all 0.3s var(--transition-smooth);
 }
@@ -184,7 +184,36 @@ button {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 12px;
+}
+
+/* National Disaster 112 Navbar Button */
+.btn-nav-112 {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #FF3B30 0%, #D32F2F 100%);
+  color: #FFFFFF;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(211, 47, 47, 0.28);
+  transition: transform 0.25s var(--transition-smooth), box-shadow 0.25s ease, background-color 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-nav-112:hover {
+  transform: scale(1.04);
+  background: linear-gradient(135deg, #FF4D42 0%, #E62E00 100%);
+  box-shadow: 0 6px 18px rgba(211, 47, 47, 0.42);
+}
+
+.btn-nav-112 .nav-112-icon {
+  flex-shrink: 0;
 }
 
 .nav-login {
@@ -1949,6 +1978,20 @@ button {
   transform: translateY(-1px);
 }
 
+.btn-dash-call.btn-national-112 {
+  background: linear-gradient(135deg, #FF5500 0%, #E52521 100%);
+  color: var(--white);
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(255, 85, 0, 0.35);
+}
+
+.btn-dash-call.btn-national-112:hover {
+  background: linear-gradient(135deg, #FF6A1A 0%, #C41814 100%);
+  color: var(--white);
+  box-shadow: 0 6px 18px rgba(229, 37, 33, 0.5);
+  transform: translateY(-1px);
+}
+
 /* ==========================================================================
    SECTION 3: EMERGENCY BLOOD DONOR NETWORK
    ========================================================================== */
@@ -2124,6 +2167,7 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
   width: 100%;
   padding: 8.5px 14px;
   border-radius: var(--radius-pill);
@@ -2920,6 +2964,13 @@ button {
   margin: 0;
 }
 
+.incident-callout-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: 100%;
+}
+
 .btn-incident-hotline {
   display: flex;
   align-items: center;
@@ -2942,6 +2993,15 @@ button {
 .btn-incident-hotline:hover {
   transform: scale(1.02);
   box-shadow: 0 8px 24px rgba(229, 37, 33, 0.5);
+}
+
+.btn-incident-hotline.btn-incident-112 {
+  background: linear-gradient(135deg, #FF5500 0%, #E52521 100%);
+  box-shadow: 0 6px 18px rgba(255, 85, 0, 0.35);
+}
+
+.btn-incident-hotline.btn-incident-112:hover {
+  box-shadow: 0 8px 24px rgba(255, 85, 0, 0.55);
 }
 
 /* ==========================================================================
@@ -3012,6 +3072,61 @@ button {
   color: #4A1A10;
   max-width: 860px;
   margin: 0;
+}
+
+.resources-hotline-strip {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.strip-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--white);
+  border: 1.5px solid rgba(158, 71, 51, 0.2);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-meta);
+  font-size: 11px;
+  box-shadow: 0 2px 8px rgba(28, 5, 2, 0.04);
+}
+
+.strip-label {
+  color: #5A1E14;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.strip-link {
+  color: var(--orange-primary);
+  font-weight: 800;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.strip-link:hover {
+  text-decoration: underline;
+}
+
+.strip-pill-state {
+  border-color: rgba(229, 37, 33, 0.35);
+  background: #FFF4F2;
+}
+
+.strip-pill-state .strip-link {
+  color: var(--red-accent);
+}
+
+.strip-pill-nat {
+  border-color: rgba(255, 85, 0, 0.35);
+  background: #FFF8F4;
+}
+
+.strip-pill-nat .strip-link {
+  color: var(--orange-primary);
 }
 
 /* Controls: Search + Zone Filter */
@@ -3294,7 +3409,8 @@ button {
 
 .resource-actions-row {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: 4px;
 }
 
@@ -3344,6 +3460,30 @@ button {
   background: #C41814;
   border-color: #C41814;
   box-shadow: 0 4px 14px rgba(229, 37, 33, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-resource-call.btn-call-1070 {
+  background: linear-gradient(135deg, #E52521 0%, #C41814 100%);
+  border-color: transparent;
+  box-shadow: 0 2px 10px rgba(229, 37, 33, 0.35);
+}
+
+.btn-resource-call.btn-call-1070:hover {
+  background: #B31410;
+  box-shadow: 0 4px 16px rgba(229, 37, 33, 0.55);
+  transform: translateY(-1px);
+}
+
+.btn-resource-call.btn-call-112 {
+  background: linear-gradient(135deg, #FF5500 0%, #E52521 100%);
+  border-color: transparent;
+  box-shadow: 0 2px 10px rgba(255, 85, 0, 0.35);
+}
+
+.btn-resource-call.btn-call-112:hover {
+  background: linear-gradient(135deg, #FF6A1A 0%, #C41814 100%);
+  box-shadow: 0 4px 16px rgba(229, 37, 33, 0.5);
   transform: translateY(-1px);
 }
 
@@ -3485,10 +3625,37 @@ button {
   cursor: pointer;
 }
 
+.courier-btns-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
 .btn-courier-call:hover {
   background: var(--orange-hover);
   transform: translateY(-2px);
   box-shadow: 0 12px 32px rgba(255, 85, 0, 0.6);
+}
+
+.btn-courier-call.btn-courier-1070 {
+  background: linear-gradient(135deg, #FF7711 0%, #E52521 100%);
+  box-shadow: 0 8px 25px rgba(229, 37, 33, 0.45);
+}
+
+.btn-courier-call.btn-courier-1070:hover {
+  background: linear-gradient(135deg, #FF8822 0%, #C41814 100%);
+  box-shadow: 0 12px 32px rgba(229, 37, 33, 0.65);
+}
+
+.btn-courier-call.btn-courier-112 {
+  background: linear-gradient(135deg, #E52521 0%, #B81512 100%);
+  box-shadow: 0 8px 25px rgba(229, 37, 33, 0.45);
+}
+
+.btn-courier-call.btn-courier-112:hover {
+  background: linear-gradient(135deg, #FF3B38 0%, #C41814 100%);
+  box-shadow: 0 12px 32px rgba(229, 37, 33, 0.65);
 }
 
 .courier-guarantee {
@@ -3733,6 +3900,16 @@ button {
   box-shadow: 0 8px 24px rgba(229, 37, 33, 0.6);
 }
 
+.footer-hotline-btn.footer-hotline-112 {
+  background: linear-gradient(135deg, #FF5500 0%, #E52521 100%);
+  box-shadow: 0 4px 16px rgba(255, 85, 0, 0.4);
+}
+
+.footer-hotline-btn.footer-hotline-112:hover {
+  background: linear-gradient(135deg, #FF7711 0%, #FF3A10 100%);
+  box-shadow: 0 8px 24px rgba(255, 85, 0, 0.65);
+}
+
 .footer-hotline-sub {
   font-family: var(--font-body);
   font-size: 11px;
@@ -3914,7 +4091,8 @@ button {
 /* ==========================================================================
    MOBILE CONTROLS BASE STYLES
    ========================================================================== */
-.nav-call-short {
+.nav-call-short,
+.nav-112-short {
   display: none;
 }
 
@@ -4112,31 +4290,70 @@ button {
   color: #FFA380;
 }
 
+.mobile-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
 .mobile-bar-call-btn {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
   background: linear-gradient(135deg, #FF5500 0%, #E52521 100%);
   color: var(--white);
   font-family: var(--font-display);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 800;
   letter-spacing: 0.03em;
-  padding: 10px 16px;
+  padding: 8.5px 13px;
   border-radius: 30px;
   text-decoration: none;
   box-shadow: 0 4px 14px rgba(255, 85, 0, 0.4);
   transition: transform 0.15s ease;
 }
 
+.mobile-bar-call-btn.mobile-bar-112-btn {
+  background: linear-gradient(135deg, #E52521 0%, #B81512 100%);
+  box-shadow: 0 4px 14px rgba(229, 37, 33, 0.45);
+}
+
 .mobile-bar-call-btn:active {
   transform: scale(0.96);
+}
+
+.mobile-nav-emergency-btn.mobile-nav-112-btn {
+  background: linear-gradient(135deg, #FF5500 0%, #D43000 100%);
+  box-shadow: 0 4px 14px rgba(255, 85, 0, 0.35);
 }
 
 /* ==========================================================================
    RESPONSIVE DESIGN (Tablets & Mobiles)
    ========================================================================== */
 @media (max-width: 1024px) {
+  .nav-pill {
+    gap: 16px;
+    padding: 6px 12px 6px 18px;
+  }
+
+  .nav-links {
+    gap: 12px;
+  }
+
+  .nav-link {
+    font-size: 12px;
+  }
+
+  .btn-get-started {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+
+  .btn-nav-112 {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
   .upload-split-grid {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -4227,6 +4444,14 @@ button {
     display: inline;
   }
 
+  .nav-112-full {
+    display: none;
+  }
+
+  .nav-112-short {
+    display: inline;
+  }
+
   .mobile-menu-toggle {
     display: flex;
   }
@@ -4242,8 +4467,12 @@ button {
   .nav-pill {
     width: 100%;
     padding: 6px 10px 6px 16px;
-    gap: 12px;
+    gap: 10px;
     justify-content: space-between;
+  }
+
+  .nav-actions {
+    gap: 8px;
   }
 
   .nav-brand .brand-name {
@@ -4251,7 +4480,12 @@ button {
   }
 
   .btn-get-started {
-    padding: 8px 14px;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .btn-nav-112 {
+    padding: 8px 12px;
     font-size: 12px;
   }
 
@@ -4525,9 +4759,20 @@ button {
     font-size: clamp(2.3rem, 14vw, 3.8rem);
   }
 
-  .btn-get-started {
-    padding: 7px 12px;
+  .nav-actions {
+    gap: 6px;
+  }
+
+  .btn-nav-112 {
+    padding: 6.5px 9px;
     font-size: 11px;
+    gap: 4px;
+  }
+
+  .btn-get-started {
+    padding: 6.5px 10px;
+    font-size: 11px;
+    gap: 4px;
   }
 
   .resource-chip {
