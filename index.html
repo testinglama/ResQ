@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photograph Slot. — Creative Studio & Slot Allocation Platform</title>
+  
+  <!-- Fonts: Syne for geometric condensed headline, Plus Jakarta Sans for body/UI, Space Grotesk for meta -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+
+  <!-- PAGE CONTAINER -->
+  <div class="page-wrapper">
+    
+    <!-- ============================================ -->
+    <!-- ZONE 1: PURE WHITE (#FFFFFF) TOP HERO ZONE -->
+    <!-- ============================================ -->
+    <section class="zone-white" id="zone-top">
+      <div class="zone-inner">
+
+        <!-- FLOATING PILL NAVBAR -->
+        <header class="navbar-wrapper">
+          <nav class="nav-pill" aria-label="Main Navigation">
+            <a href="#" class="nav-brand">
+              <span class="brand-dot"></span>
+              <span class="brand-name">Photograph Slot.</span>
+            </a>
+
+            <div class="nav-actions">
+              <button class="btn-get-started" id="nav-get-started">
+                <span>Get Started</span>
+                <svg class="btn-arrow" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 8h10M9 4l4 4-4 4"/>
+                </svg>
+              </button>
+            </div>
+          </nav>
+        </header>
+
+        <!-- FULL-BLEED WORDMARK / H1 -->
+        <div class="hero-headline-container">
+          <h1 class="hero-wordmark">
+            <span class="wordmark-inner">PHOTOGRAPH SLOT.</span>
+          </h1>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SEAM BRIDGE: CENTER OVERLAPPING 3D SCULPTURE -->
+    <!-- Bleeds across the pure white / off-white seam-->
+    <!-- ============================================ -->
+    <div class="seam-bridge">
+      <div class="hero-3d-wrapper" id="hero-3d-mount">
+        <canvas id="canvas-3d"></canvas>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ZONE 2: OFF-WHITE (#EDECE8) LOWER HERO ZONE  -->
+    <!-- ============================================ -->
+    <section class="zone-offwhite" id="zone-bottom">
+      <div class="zone-inner">
+        
+        <!-- THREE-WAY SPLIT ROW (Rule of thirds hero composition) -->
+        <div class="hero-split-row">
+
+          <!-- BOTTOM-LEFT: Social Proof + Tagline + Dotted Underline -->
+          <div class="hero-col-left">
+            
+            <!-- Editorial Subheading -->
+            <div class="hero-subheading-wrap">
+              <span class="subheading-badge"><span class="badge-dot"></span>STUDIO ALLOCATION PLATFORM</span>
+              <h2 class="hero-subheading">Curated Daylight Studios &amp; Medium-Format Workspaces</h2>
+            </div>
+
+            <!-- Photography Quote with editorial attribution -->
+            <div class="tagline-wrapper">
+              <blockquote class="hero-quote">
+                <p class="quote-text">“To photograph is to align the head, the eye, and the heart along the same line of sight.”</p>
+                <cite class="quote-author">— Henri Cartier-Bresson</cite>
+              </blockquote>
+              <div class="dotted-underline"></div>
+            </div>
+
+          </div>
+
+          <!-- CENTER: Spacer for 3D Visual Centerpiece -->
+          <div class="hero-col-center">
+            <!-- Space reserved for the centered overlapping Three.js sculpture -->
+          </div>
+
+          <!-- BOTTOM-RIGHT: Meta list (/01 /02 /03) + Circular Lime CTA -->
+          <div class="hero-col-right">
+            
+            <!-- Meta Index List -->
+            <ul class="meta-index-list" aria-label="Platform Highlights">
+              <li class="meta-item">
+                <span class="meta-label">Web based</span>
+                <span class="meta-index">/01</span>
+              </li>
+              <li class="meta-item">
+                <span class="meta-label">Real-time sync</span>
+                <span class="meta-index">/02</span>
+              </li>
+              <li class="meta-item">
+                <span class="meta-label">Instant booking</span>
+                <span class="meta-index">/03</span>
+              </li>
+              <li class="meta-item">
+                <span class="meta-label">Tether cloud</span>
+                <span class="meta-index">/04</span>
+              </li>
+            </ul>
+
+            <!-- Floating Lime Circular CTA ("How it works?") -->
+            <div class="circular-cta-anchor">
+              <button class="circular-cta-btn" id="cta-how-it-works" aria-label="Watch how it works">
+                <div class="cta-ripple-ring"></div>
+                <div class="cta-inner">
+                  <div class="cta-icon-wrap">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                      <polygon points="6 4 20 12 6 20 6 4" />
+                    </svg>
+                  </div>
+                  <span class="cta-text">How it<br>works?</span>
+                </div>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION 3: UPLOAD PHOTOGRAPH                 -->
+    <!-- Title, subtitle, paragraph on left side      -->
+    <!-- Image preview & interactive upload on right  -->
+    <!-- ============================================ -->
+    <section class="section-upload" id="upload-section">
+      <div class="zone-inner upload-inner">
+        <div class="upload-split-grid">
+          
+          <!-- LEFT SIDE: Title, Subtitle, and Paragraph -->
+          <div class="upload-col-left">
+            <div class="upload-badge">
+              <span class="badge-dot"></span>
+              <span>DIRECT INGESTION PIPELINE</span>
+            </div>
+            
+            <h2 class="upload-title">UPLOAD PHOTOGRAPH.</h2>
+            
+            <h3 class="upload-subtitle">
+              Instant lossless cloud synchronization directly mapped to your daylight studio slot.
+            </h3>
+            
+            <p class="upload-paragraph">
+              Whether you are shooting on tethered medium-format Hasselblad bodies or delivering high-res 35mm proofs, upload your RAW and calibrated frames here. Our automated color pipeline extracts embedded EXIF profiles, applies calibrated studio daylight profiles, and broadcasts secure client viewing galleries in real time.
+            </p>
+
+            <div class="dotted-underline"></div>
+            
+            <div class="upload-specs-list">
+              <div class="upload-spec-item">
+                <div class="spec-meta-header">
+                  <span class="spec-index">/01</span>
+                  <span class="spec-label">SUPPORTED FORMATS</span>
+                </div>
+                <span class="spec-val">RAW • ARW • CR3 • DNG • TIFF • JPEG</span>
+              </div>
+              <div class="upload-spec-item">
+                <div class="spec-meta-header">
+                  <span class="spec-index">/02</span>
+                  <span class="spec-label">PIPELINE SPEED</span>
+                </div>
+                <span class="spec-val">Lossless 10Gbps Dedicated Uplink</span>
+              </div>
+              <div class="upload-spec-item">
+                <div class="spec-meta-header">
+                  <span class="spec-index">/03</span>
+                  <span class="spec-label">COLOR SCIENCE</span>
+                </div>
+                <span class="spec-val">Calibrated Display P3 &amp; Adobe RGB</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT SIDE: Image Preview & Interactive Upload Area -->
+          <div class="upload-col-right">
+            <div class="upload-dropzone-card" id="upload-dropzone">
+              
+              <!-- Hidden File Input -->
+              <input type="file" id="photo-file-input" class="photo-file-input" accept="image/*" />
+              
+              <!-- Live Image Preview Container -->
+              <div class="upload-preview-frame">
+                <img id="upload-preview-img" class="upload-preview-img" src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=900&auto=format&fit=crop&q=85" alt="Uploaded studio photograph preview" />
+              </div>
+
+              <!-- Interactive Dropzone Control Bar -->
+              <div class="upload-controls-bar">
+                <div class="upload-prompt-text">
+                  <span class="upload-action-title">Drag &amp; drop frame or choose file</span>
+                  <span class="upload-action-sub" id="upload-file-status">Lossless RAW / JPG up to 250MB</span>
+                </div>
+                
+                <button type="button" class="btn-upload-action" id="btn-trigger-upload">
+                  <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                    <path d="M10 3a1 1 0 0 1 1 1v7.586l2.293-2.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 1 1 1.414-1.414L9 11.586V4a1 1 0 0 1 1-1z" />
+                    <path d="M4 14a1 1 0 0 1 1 1v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a1 1 0 1 1 2 0v1a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-1a1 1 0 0 1 1-1z" />
+                  </svg>
+                  <span>Select File</span>
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ============================================ -->
+  <!-- MODAL: "HOW IT WORKS?"                       -->
+  <!-- ============================================ -->
+  <div class="modal-backdrop" id="how-modal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="modal-close" aria-label="Close modal">✕</button>
+      
+      <div class="modal-badge">
+        <span class="lime-badge-dot"></span>
+        <span>THE SYSTEM ARCHITECTURE</span>
+      </div>
+
+      <h3 class="modal-title">HOW PHOTOGRAPH SLOT WORKS.</h3>
+      <p class="modal-subtitle">Four integrated steps connecting high-tier photographers to precision-calibrated studio slots.</p>
+
+      <div class="modal-steps-grid">
+        <div class="modal-step">
+          <div class="step-circle">01</div>
+          <h4 class="step-title">Select Sunlight & Spatial Geometry</h4>
+          <p class="step-desc">Pick daylight-oriented lofts or black-box infinity voids calibrated with exact sun-angle projections.</p>
+        </div>
+
+        <div class="modal-step">
+          <div class="step-circle">02</div>
+          <h4 class="step-title">Hardware Rig Pre-Load</h4>
+          <p class="step-desc">Specify Profoto strobe arrays, medium-format cameras, and C-stands. Studio technicians pre-stage gear prior to arrival.</p>
+        </div>
+
+        <div class="modal-step">
+          <div class="step-circle">03</div>
+          <h4 class="step-title">1-Click Slot Lock</h4>
+          <p class="step-desc">Instant digital key issued to your Apple/Google Wallet for automated biometric studio door unlock.</p>
+        </div>
+
+        <div class="modal-step">
+          <div class="step-circle">04</div>
+          <h4 class="step-title">Tether & Live Client Review</h4>
+          <p class="step-desc">Capture One and Lightroom live sessions broadcast directly to your global art directors in real time.</p>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="modal-primary-btn" id="modal-explore-btn">Jump To Slot Matrix</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION FOR SLOT LOCK -->
+  <div class="toast-notification" id="booking-toast">
+    <div class="toast-icon">✓</div>
+    <div class="toast-content">
+      <div class="toast-title">Slot Locked Successfully!</div>
+      <div class="toast-desc" id="toast-desc">Studio 01 held for you. Confirmation sent to your email.</div>
+    </div>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
