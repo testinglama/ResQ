@@ -30,15 +30,16 @@ class OpticalSculpture {
     this.camera = new THREE.PerspectiveCamera(36, this.width / this.height, 0.1, 100);
     this.camera.position.set(0, 0, 6.7);
 
-    // 2. High-performance WebGL Renderer
+    // 2. High-performance WebGL Renderer with capped DPR for maximum FPS
     this.renderer = new THREE.WebGLRenderer({
       canvas: this.canvas,
       antialias: true,
       alpha: true,
-      powerPreference: 'high-performance'
+      powerPreference: 'high-performance',
+      precision: 'mediump'
     });
     this.renderer.setSize(this.width, this.height);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.0;
 
@@ -59,7 +60,28 @@ class OpticalSculpture {
     // 6. Events & Animation
     this.bindEvents();
     this.clock = new THREE.Clock();
+
+    // 7. IntersectionObserver for 0% offscreen CPU/GPU load
+    this.isVisible = true;
+    this.isLooping = true;
+    this.setupIntersectionObserver();
+
     this.animate();
+  }
+
+  setupIntersectionObserver() {
+    if ('IntersectionObserver' in window && this.container) {
+      this.observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          this.isVisible = entry.isIntersecting;
+          if (this.isVisible && !this.isLooping) {
+            this.isLooping = true;
+            this.animate();
+          }
+        });
+      }, { rootMargin: '120px' });
+      this.observer.observe(this.container);
+    }
   }
 
   setupStudioEnvironment() {
@@ -191,12 +213,12 @@ class OpticalSculpture {
     this.outerRingGroup = new THREE.Group();
 
     // Main Torus Body
-    const outerRingGeo = new THREE.TorusGeometry(1.85, 0.085, 32, 100);
+    const outerRingGeo = new THREE.TorusGeometry(1.85, 0.085, 20, 72);
     const outerRingMesh = new THREE.Mesh(outerRingGeo, this.obsidianRingMat);
     this.outerRingGroup.add(outerRingMesh);
 
     // Mahogany Bevel Rim
-    const outerRimGeo = new THREE.TorusGeometry(1.92, 0.018, 16, 100);
+    const outerRimGeo = new THREE.TorusGeometry(1.92, 0.018, 12, 72);
     const outerRimMesh = new THREE.Mesh(outerRimGeo, this.mahoganyBevelMat);
     this.outerRingGroup.add(outerRimMesh);
 
@@ -204,7 +226,7 @@ class OpticalSculpture {
     for (let i = 0; i < 8; i++) {
       const angle = (i / 8) * Math.PI * 2;
       const isCardinal = i % 2 === 0;
-      const dotGeo = new THREE.SphereGeometry(isCardinal ? 0.048 : 0.026, 16, 16);
+      const dotGeo = new THREE.SphereGeometry(isCardinal ? 0.048 : 0.026, 12, 12);
       const dotMesh = new THREE.Mesh(dotGeo, isCardinal ? (i === 0 ? this.orangeMat : this.redAccentMat) : this.mahoganyBevelMat);
       dotMesh.position.set(Math.cos(angle) * 1.85, Math.sin(angle) * 1.85, 0.06);
       this.outerRingGroup.add(dotMesh);
@@ -217,12 +239,12 @@ class OpticalSculpture {
     // =========================================================================
     this.midRingGroup = new THREE.Group();
 
-    const midRingGeo = new THREE.TorusGeometry(1.55, 0.055, 24, 90);
+    const midRingGeo = new THREE.TorusGeometry(1.55, 0.055, 18, 64);
     const midRingMesh = new THREE.Mesh(midRingGeo, this.obsidianRingMat);
     this.midRingGroup.add(midRingMesh);
 
     // Inner Orbit Ring
-    const innerOrbitRingGeo = new THREE.TorusGeometry(1.48, 0.02, 16, 90);
+    const innerOrbitRingGeo = new THREE.TorusGeometry(1.48, 0.02, 12, 64);
     const innerOrbitRingMesh = new THREE.Mesh(innerOrbitRingGeo, this.mahoganyBevelMat);
     this.midRingGroup.add(innerOrbitRingMesh);
 
@@ -235,39 +257,38 @@ class OpticalSculpture {
     // =========================================================================
     this.lensGroup = new THREE.Group();
 
-    // Pristine Optical Glass Torus Ring (frames the core without obscuring it)
-    const glassTorusGeo = new THREE.TorusGeometry(1.12, 0.07, 32, 80);
+    // Pristine Optical Glass Torus Ring (lightweight clearcoat glass without heavy transmission pass)
+    const glassTorusGeo = new THREE.TorusGeometry(1.12, 0.07, 20, 60);
     this.glassMaterial = new THREE.MeshPhysicalMaterial({
       color: 0xFFFFFF,
-      transmission: 0.96,
-      opacity: 1,
       transparent: true,
-      roughness: 0.02,
-      metalness: 0.0,
-      ior: 1.5,
-      thickness: 0.3,
-      clearcoat: 1.0
+      opacity: 0.35,
+      roughness: 0.08,
+      metalness: 0.05,
+      clearcoat: 0.95,
+      clearcoatRoughness: 0.08,
+      reflectivity: 0.95
     });
     const glassTorus = new THREE.Mesh(glassTorusGeo, this.glassMaterial);
     this.lensGroup.add(glassTorus);
 
     // Precision Aperture Diaphragm Collar
-    const apertureBandGeo = new THREE.CylinderGeometry(1.18, 1.18, 0.06, 64, 1, true);
+    const apertureBandGeo = new THREE.CylinderGeometry(1.18, 1.18, 0.06, 48, 1, true);
     const apertureBandMesh = new THREE.Mesh(apertureBandGeo, this.mahoganyBevelMat);
     apertureBandMesh.rotation.x = Math.PI / 2;
     this.lensGroup.add(apertureBandMesh);
 
     // Concentric Fine Aperture Rings (Fiery Orange & Ruby Red)
-    const apRing1 = new THREE.Mesh(new THREE.TorusGeometry(0.85, 0.014, 16, 64), this.orangeMat);
+    const apRing1 = new THREE.Mesh(new THREE.TorusGeometry(0.85, 0.014, 12, 48), this.orangeMat);
     this.lensGroup.add(apRing1);
 
-    const apRing2 = new THREE.Mesh(new THREE.TorusGeometry(1.02, 0.01, 16, 64), this.redAccentMat);
+    const apRing2 = new THREE.Mesh(new THREE.TorusGeometry(1.02, 0.01, 12, 48), this.redAccentMat);
     this.lensGroup.add(apRing2);
 
     // =========================================================================
     // 5. INNER EMERGENCY BEACON CORE: Incandescent Magma Orb (#FF5500)
     // =========================================================================
-    const coreGeo = new THREE.SphereGeometry(0.52, 48, 48);
+    const coreGeo = new THREE.SphereGeometry(0.52, 32, 32);
     this.coreMesh = new THREE.Mesh(coreGeo, this.orangeMat);
     this.lensGroup.add(this.coreMesh);
 
@@ -298,25 +319,26 @@ class OpticalSculpture {
   }
 
   bindEvents() {
-    window.addEventListener('resize', () => this.onResize());
+    window.addEventListener('resize', () => this.onResize(), { passive: true });
 
     // Cursor tracking for smooth parallax
     window.addEventListener('mousemove', (e) => {
+      if (!this.isVisible) return;
       const normX = (e.clientX / window.innerWidth) * 2 - 1;
       const normY = -(e.clientY / window.innerHeight) * 2 + 1;
       this.mouse.targetX = normX * 0.3;
       this.mouse.targetY = normY * 0.24;
-    });
+    }, { passive: true });
 
     // Interactive Drag & Tilt
     this.canvas.addEventListener('mousedown', (e) => {
       this.isDragging = true;
       this.previousMousePosition = { x: e.clientX, y: e.clientY };
-    });
+    }, { passive: true });
 
     window.addEventListener('mouseup', () => {
       this.isDragging = false;
-    });
+    }, { passive: true });
 
     window.addEventListener('mousemove', (e) => {
       if (!this.isDragging) return;
@@ -328,7 +350,7 @@ class OpticalSculpture {
       this.dragRotation.x = Math.max(-0.65, Math.min(0.65, this.dragRotation.x));
 
       this.previousMousePosition = { x: e.clientX, y: e.clientY };
-    });
+    }, { passive: true });
 
     // Touch support
     this.canvas.addEventListener('touchstart', (e) => {
@@ -340,7 +362,7 @@ class OpticalSculpture {
 
     window.addEventListener('touchend', () => {
       this.isDragging = false;
-    });
+    }, { passive: true });
 
     window.addEventListener('touchmove', (e) => {
       if (!this.isDragging || e.touches.length !== 1) return;
@@ -362,9 +384,16 @@ class OpticalSculpture {
     this.camera.aspect = this.width / this.height;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(this.width, this.height);
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   }
 
   animate() {
+    // Zero CPU/GPU cost when scrolled away from Hero
+    if (!this.isVisible) {
+      this.isLooping = false;
+      return;
+    }
+    this.isLooping = true;
     requestAnimationFrame(() => this.animate());
 
     const time = this.clock.getElapsedTime();
@@ -373,7 +402,7 @@ class OpticalSculpture {
     this.mouse.x += (this.mouse.targetX - this.mouse.x) * 0.05;
     this.mouse.y += (this.mouse.targetY - this.mouse.y) * 0.05;
 
-    // 2. Stately original continuous horizontal rotation of the outer model
+    // 2. Continuous horizontal rotation of the outer model
     if (!this.isDragging) {
       this.dragRotation.y += 0.0028;
     }
@@ -381,7 +410,7 @@ class OpticalSculpture {
     this.masterGroup.rotation.x = this.dragRotation.x + this.mouse.y * 0.35;
     this.masterGroup.rotation.y = this.dragRotation.y + this.mouse.x * 0.45;
 
-    // Subtle gentle floating on the Y axis (very subtle amplitude so it stays clear of the title)
+    // Subtle gentle floating on the Y axis
     this.masterGroup.position.y = Math.sin(time * 1.2) * 0.02;
 
     // 3. Counter-rotation Doppler radar sweep of the inner ring
@@ -437,6 +466,7 @@ class AppUI {
     this.initHowItWorksModal();
     this.initPhotographUpload();
     this.initDonorForm();
+    this.initIncidentReporting();
     this.initCountdownTimer();
     this.initSmoothScroll();
     this.updateSummary();
@@ -683,6 +713,129 @@ class AppUI {
 
       form.reset();
     });
+  }
+
+  initIncidentReporting() {
+    const form = document.getElementById('incident-report-form');
+    const categorySelect = document.getElementById('inc-category');
+    const chips = document.querySelectorAll('.category-chip');
+    const fileInput = document.getElementById('incident-file-input');
+    const dropzone = document.getElementById('incident-file-dropzone');
+    const fileLabel = document.getElementById('incident-file-label');
+    const queueList = document.getElementById('triage-tickets-list');
+    const toast = document.getElementById('booking-toast');
+    const toastTitle = toast?.querySelector('.toast-title');
+    const toastDesc = document.getElementById('toast-desc');
+
+    // 1. Quick Category Chips
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const cat = chip.getAttribute('data-cat');
+        if (categorySelect && cat) {
+          for (let opt of categorySelect.options) {
+            if (opt.value === cat || opt.text.includes(cat)) {
+              categorySelect.value = opt.value;
+              break;
+            }
+          }
+        }
+      });
+    });
+
+    // 2. Dropzone file attachment
+    if (dropzone && fileInput) {
+      dropzone.addEventListener('click', () => fileInput.click());
+
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+          const f = e.target.files[0];
+          const sizeKb = Math.round(f.size / 1024);
+          if (fileLabel) {
+            fileLabel.innerHTML = `<strong>${f.name}</strong> (${sizeKb} KB) • Attached`;
+            fileLabel.style.color = '#1C0502';
+          }
+        }
+      });
+
+      ['dragover', 'dragenter'].forEach(evt => {
+        dropzone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          dropzone.style.borderColor = '#FF5500';
+          dropzone.style.background = '#FFF3EB';
+        });
+      });
+
+      ['dragleave', 'drop'].forEach(evt => {
+        dropzone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          dropzone.style.borderColor = '';
+          dropzone.style.background = '';
+        });
+      });
+
+      dropzone.addEventListener('drop', (e) => {
+        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
+          const f = e.dataTransfer.files[0];
+          const sizeKb = Math.round(f.size / 1024);
+          if (fileLabel) {
+            fileLabel.innerHTML = `<strong>${f.name}</strong> (${sizeKb} KB) • Attached`;
+            fileLabel.style.color = '#1C0502';
+          }
+        }
+      });
+    }
+
+    // 3. Form Submission
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const cat = categorySelect?.value || 'Incident';
+        const severity = document.getElementById('inc-severity')?.value || 'HIGH';
+        const location = document.getElementById('inc-location')?.value || 'UMU Campus';
+        const landmark = document.getElementById('inc-landmark')?.value || '';
+        const ticketNum = Math.floor(4100 + Math.random() * 899);
+        const ticketId = `#INC-${ticketNum}`;
+
+        // Prepend to Live Triage Queue
+        if (queueList) {
+          const ticketCard = document.createElement('div');
+          const isCritical = severity === 'CRITICAL';
+          ticketCard.className = `triage-ticket-item ${isCritical ? 'ticket-critical' : 'ticket-warning'}`;
+          ticketCard.style.animation = 'fadeSlideUp 0.4s ease both';
+          ticketCard.innerHTML = `
+            <div class="ticket-top">
+              <span class="ticket-id">${ticketId}</span>
+              <span class="ticket-badge ${isCritical ? 'badge-critical' : 'badge-warning'}">DISPATCHED</span>
+            </div>
+            <h4 class="ticket-heading">${cat}</h4>
+            <p class="ticket-loc">${location}${landmark ? ' • ' + landmark : ''}</p>
+            <div class="ticket-meta">
+              <span>Status: Response Team En Route</span>
+              <span class="ticket-time">Just now</span>
+            </div>
+          `;
+          queueList.prepend(ticketCard);
+        }
+
+        // Show Toast
+        if (toast) {
+          if (toastTitle) toastTitle.textContent = 'Incident Report Dispatched!';
+          if (toastDesc) toastDesc.textContent = `Ticket ${ticketId} registered. Campus security & triage unit notified.`;
+          toast.classList.add('active');
+          setTimeout(() => {
+            toast.classList.remove('active');
+          }, 5000);
+        }
+
+        form.reset();
+        if (fileLabel) {
+          fileLabel.innerHTML = `Drag &amp; drop photos or <strong class="browse-link">browse files</strong>`;
+          fileLabel.style.color = '';
+        }
+      });
+    }
   }
 
   initSmoothScroll() {

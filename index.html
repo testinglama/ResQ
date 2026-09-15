@@ -35,6 +35,7 @@
               <a href="#zone-top" class="nav-link">Emergency Portal</a>
               <a href="#dashboard-section" class="nav-link">Disaster Radar</a>
               <a href="#blood-donor-section" class="nav-link">Blood Donors</a>
+              <a href="#incident-section" class="nav-link">Report Incident</a>
             </div>
 
             <div class="nav-actions">
@@ -473,6 +474,243 @@
                 <li>• UMU Angara Campus Health Center</li>
               </ul>
             </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION 4: CAMPUS INCIDENT REPORTING         -->
+    <!-- ============================================ -->
+    <section class="section-incident" id="incident-section">
+      <div class="zone-inner incident-inner">
+        
+        <!-- Section Header -->
+        <div class="incident-header-wrap">
+          <div class="incident-badge">
+            <span class="incident-dot"></span>
+            <span>RAPID CRISIS INTERVENTION • CAMPUS HAZARD DISPATCH</span>
+          </div>
+          <h2 class="incident-title">INCIDENT REPORTING &amp; EMERGENCY TRIAGE.</h2>
+          <p class="incident-subtitle">
+            Instantly report active security threats, structural damage, medical crises, electrical hazards, or monsoon flooding across Usha Martin University for rapid dispatcher mobilization.
+          </p>
+        </div>
+
+        <!-- Quick Category Selectors -->
+        <div class="incident-category-chips" id="incident-quick-chips">
+          <button type="button" class="category-chip active" data-cat="Electrical Hazard">
+            <span class="chip-icon">⚡</span>
+            <span>Electrical Surge</span>
+          </button>
+          <button type="button" class="category-chip" data-cat="Fire & Smoke">
+            <span class="chip-icon">🔥</span>
+            <span>Fire &amp; Smoke</span>
+          </button>
+          <button type="button" class="category-chip" data-cat="Flash Flooding">
+            <span class="chip-icon">🌊</span>
+            <span>Flash Flood</span>
+          </button>
+          <button type="button" class="category-chip" data-cat="Medical Emergency">
+            <span class="chip-icon">🚨</span>
+            <span>Medical Trauma</span>
+          </button>
+          <button type="button" class="category-chip" data-cat="Security Threat">
+            <span class="chip-icon">🛡️</span>
+            <span>Security Threat</span>
+          </button>
+          <button type="button" class="category-chip" data-cat="Structural Damage">
+            <span class="chip-icon">⚠️</span>
+            <span>Structural Damage</span>
+          </button>
+        </div>
+
+        <!-- Main Incident Split: Form (Left) & Live Triage Queue (Right) -->
+        <div class="incident-split-grid">
+          
+          <!-- LEFT SIDE: Comprehensive Incident Reporting Form -->
+          <div class="incident-form-card">
+            <div class="incident-form-header">
+              <h3 class="form-title">LODGE ACTIVE INCIDENT TICKET</h3>
+              <p class="form-sub">Dispatched synchronously to UMU Campus Security, Facilities &amp; Rescue Response.</p>
+            </div>
+
+            <form class="incident-form" id="incident-report-form">
+              
+              <!-- Category & Severity Row -->
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="inc-category" class="form-label">Incident Category</label>
+                  <select id="inc-category" class="form-select" required>
+                    <option value="Electrical Hazard">⚡ Electrical Surge / Wire Fault</option>
+                    <option value="Fire & Smoke">🔥 Fire &amp; Smoke Outbreak</option>
+                    <option value="Flash Flooding">🌊 Flash Flood / Waterlogging</option>
+                    <option value="Medical Emergency">🚨 Medical Emergency / Trauma</option>
+                    <option value="Security Threat">🛡️ Security Threat / Unauthorized Entry</option>
+                    <option value="Structural Damage">⚠️ Structural / Fallen Tree Damage</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="inc-severity" class="form-label">Severity Level</label>
+                  <select id="inc-severity" class="form-select" required>
+                    <option value="CRITICAL">🔴 CRITICAL (Immediate Life Threat)</option>
+                    <option value="HIGH">🟠 HIGH (Urgent Dispatch &lt;15m)</option>
+                    <option value="ADVISORY">🟡 ADVISORY (Hazard / Precaution)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Location & Specific Room Row -->
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="inc-location" class="form-label">Campus Zone / Block</label>
+                  <select id="inc-location" class="form-select" required>
+                    <option value="Academic Block A">Zone A • Academic Block A</option>
+                    <option value="Academic Block B">Zone A • Academic Block B</option>
+                    <option value="Engineering & Labs">Zone B • Engineering Labs &amp; Workshops</option>
+                    <option value="Sports Arena & Grounds">Zone C • Sports Arena &amp; Open Grounds</option>
+                    <option value="Hostel Block A & Dining">Zone D • Hostels &amp; Dining Hall</option>
+                    <option value="Campus Main Gate & Perimeter">Perimeter • Main Gate &amp; Parking</option>
+                    <option value="Central Quadrangle">Central Quadrangle &amp; Convocation Ground</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="inc-landmark" class="form-label">Exact Room / Landmark</label>
+                  <input type="text" id="inc-landmark" class="form-input" placeholder="e.g. Ground Floor East Wing, Room 108" required />
+                </div>
+              </div>
+
+              <!-- Incident Narrative -->
+              <div class="form-group">
+                <label for="inc-description" class="form-label">Incident Narrative / Description</label>
+                <textarea id="inc-description" class="form-textarea" rows="3" placeholder="Provide specific details: visible smoke, injured individuals, rising water level, or structural instability..." required></textarea>
+              </div>
+
+              <!-- Evidence Upload Dropzone -->
+              <div class="form-group">
+                <label class="form-label">Attach Visual Evidence (Photo / Video)</label>
+                <div class="incident-file-dropzone" id="incident-file-dropzone">
+                  <input type="file" id="incident-file-input" class="incident-file-input" accept="image/*,video/*" />
+                  <div class="file-dropzone-content">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="17 8 12 3 7 8"></polyline>
+                      <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <span id="incident-file-label">Drag &amp; drop photos or <strong class="browse-link">browse files</strong></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Reporter Contact & Anonymous Checkbox -->
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="inc-reporter" class="form-label">Reporter Name &amp; Contact</label>
+                  <input type="text" id="inc-reporter" class="form-input" placeholder="e.g. Aryan Kushwaha (9263532588)" />
+                </div>
+
+                <div class="form-group form-check-group">
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="inc-anonymous" />
+                    <span class="custom-checkbox"></span>
+                    <span class="checkbox-label">Keep My Identity Confidential (Anonymous SOS)</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Submit Actions -->
+              <div class="form-submit-actions">
+                <button type="submit" class="btn-incident-submit" id="btn-submit-incident">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                  <span>Dispatch Incident Report Now</span>
+                </button>
+                <span class="submit-note">⚡ Immediately prioritized by UMU Emergency Dispatch console.</span>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- RIGHT SIDE: Live Triage Queue & Emergency SOS Callout -->
+          <div class="incident-right-col">
+            
+            <!-- Live Triage Queue Card -->
+            <div class="triage-queue-card">
+              <div class="triage-queue-header">
+                <div class="triage-title-wrap">
+                  <span class="triage-dot"></span>
+                  <h3 class="triage-title">LIVE INCIDENT DISPATCH QUEUE</h3>
+                </div>
+                <span class="triage-live-pill">SYNCED: ACTIVE</span>
+              </div>
+
+              <div class="triage-tickets-list" id="triage-tickets-list">
+                
+                <div class="triage-ticket-item ticket-critical">
+                  <div class="ticket-top">
+                    <span class="ticket-id">#INC-4092</span>
+                    <span class="ticket-badge badge-critical">DISPATCHED</span>
+                  </div>
+                  <h4 class="ticket-heading">Severed High-Voltage Line</h4>
+                  <p class="ticket-loc">Zone C • Sports Arena East Fence</p>
+                  <div class="ticket-meta">
+                    <span>Crew On-Site: UMU Facilities</span>
+                    <span class="ticket-time">6m ago</span>
+                  </div>
+                </div>
+
+                <div class="triage-ticket-item ticket-warning">
+                  <div class="ticket-top">
+                    <span class="ticket-id">#INC-4089</span>
+                    <span class="ticket-badge badge-warning">IN PROGRESS</span>
+                  </div>
+                  <h4 class="ticket-heading">Monsoon Drainage Overflow</h4>
+                  <p class="ticket-loc">Zone D • Hostel Block B Perimeter</p>
+                  <div class="ticket-meta">
+                    <span>Submersible Pumps Active</span>
+                    <span class="ticket-time">24m ago</span>
+                  </div>
+                </div>
+
+                <div class="triage-ticket-item ticket-stable">
+                  <div class="ticket-top">
+                    <span class="ticket-id">#INC-4084</span>
+                    <span class="ticket-badge badge-stable">RESOLVED</span>
+                  </div>
+                  <h4 class="ticket-heading">Lightning Surge Ground Check</h4>
+                  <p class="ticket-loc">Zone B • Engineering Lab Block</p>
+                  <div class="ticket-meta">
+                    <span>Ground Arrester Certified</span>
+                    <span class="ticket-time">1h ago</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Emergency Direct Call Card -->
+            <div class="incident-callout-card">
+              <div class="callout-top">
+                <span class="callout-flame">⚠️</span>
+                <span class="callout-badge">LIFE-THREATENING EMERGENCY?</span>
+              </div>
+              <p class="callout-text">
+                Do not wait for form ticket review if lives are in immediate danger. Trigger the 24/7 direct campus emergency line now.
+              </p>
+              <a href="tel:9263532588" class="btn-incident-hotline" aria-label="Direct Campus Emergency Call at 9263532588">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                <span>Direct SOS: 9263532588</span>
+              </a>
+            </div>
+
           </div>
 
         </div>
