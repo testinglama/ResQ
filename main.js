@@ -69,12 +69,12 @@ class OpticalSculpture {
     envCanvas.height = 512;
     const ctx = envCanvas.getContext('2d');
 
-    // Base high-key studio gradient (pure clean tones, zero muddy dark shadows)
+    // Base high-key studio gradient with subtle warm white tones
     const baseGrad = ctx.createLinearGradient(0, 0, 0, 512);
     baseGrad.addColorStop(0.0, '#FFFFFF');
-    baseGrad.addColorStop(0.35, '#F8F8F6');
-    baseGrad.addColorStop(0.7, '#EBEBE7');
-    baseGrad.addColorStop(1.0, '#DADAD4');
+    baseGrad.addColorStop(0.35, '#FFF8F4');
+    baseGrad.addColorStop(0.7, '#FDF1E8');
+    baseGrad.addColorStop(1.0, '#F6E3D5');
     ctx.fillStyle = baseGrad;
     ctx.fillRect(0, 0, 1024, 512);
 
@@ -93,12 +93,12 @@ class OpticalSculpture {
     ctx.fillStyle = softboxRight;
     ctx.fillRect(620, 20, 404, 400);
 
-    // Left Lime Accent Reflection
-    const limeAccent = ctx.createRadialGradient(160, 260, 10, 160, 260, 180);
-    limeAccent.addColorStop(0, 'rgba(199, 233, 72, 0.85)');
-    limeAccent.addColorStop(0.6, 'rgba(199, 233, 72, 0.2)');
-    limeAccent.addColorStop(1, 'rgba(199, 233, 72, 0)');
-    ctx.fillStyle = limeAccent;
+    // Left Fiery Orange & Vermilion Accent Reflection
+    const orangeAccent = ctx.createRadialGradient(160, 260, 10, 160, 260, 180);
+    orangeAccent.addColorStop(0, 'rgba(255, 85, 0, 0.9)');
+    orangeAccent.addColorStop(0.6, 'rgba(229, 37, 33, 0.3)');
+    orangeAccent.addColorStop(1, 'rgba(255, 85, 0, 0)');
+    ctx.fillStyle = orangeAccent;
     ctx.fillRect(0, 80, 360, 400);
 
     const envTexture = new THREE.CanvasTexture(envCanvas);
@@ -114,8 +114,8 @@ class OpticalSculpture {
   }
 
   setupLighting() {
-    // Pure studio ambient light - balanced so colors stay true without bleaching
-    const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.6);
+    // Pure studio ambient light with warm tone
+    const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.65);
     this.scene.add(ambientLight);
 
     // Main studio key light
@@ -123,29 +123,29 @@ class OpticalSculpture {
     keyLight.position.set(5, 6, 5);
     this.scene.add(keyLight);
 
-    // Soft fill light
-    const fillLight = new THREE.DirectionalLight(0xF4F5F3, 0.35);
+    // Soft warm fill light
+    const fillLight = new THREE.DirectionalLight(0xFFF3EB, 0.35);
     fillLight.position.set(-6, -2, 4);
     this.scene.add(fillLight);
 
-    // Dedicated Lime Spotlight directly illuminating the core with pure #C7E948 photons
-    const limeLight = new THREE.PointLight(0xC7E948, 3.2, 10);
-    limeLight.position.set(0.5, 0.5, 3.8);
-    this.scene.add(limeLight);
+    // Dedicated Fiery Orange Spotlight directly illuminating the core with pure #FF5500 photons
+    this.orangeLight = new THREE.PointLight(0xFF5500, 3.6, 10);
+    this.orangeLight.position.set(0.5, 0.5, 3.8);
+    this.scene.add(this.orangeLight);
 
-    // Back rim light
-    const backRim = new THREE.DirectionalLight(0xFFFFFF, 0.85);
+    // Back warm rim light
+    const backRim = new THREE.DirectionalLight(0xFFEADB, 0.85);
     backRim.position.set(0, -4, -5);
     this.scene.add(backRim);
   }
 
   buildSculpture() {
     // =========================================================================
-    // 1. MATERIALS: Ink Black (#0E0E0F matching title), Polished Bevel & Lime Core
+    // 1. MATERIALS: Obsidian Red, Polished Mahogany & Fiery Orange Core
     // =========================================================================
-    // Exact title ink color: #0E0E0F
-    this.inkRingMat = new THREE.MeshPhysicalMaterial({
-      color: 0x0E0E0F,
+    // Deep obsidian red-orange metallic gimbal ring
+    this.obsidianRingMat = new THREE.MeshPhysicalMaterial({
+      color: 0x220603,
       metalness: 0.88,
       roughness: 0.22,
       clearcoat: 0.7,
@@ -153,8 +153,9 @@ class OpticalSculpture {
       reflectivity: 0.9
     });
 
-    this.inkBevelMat = new THREE.MeshPhysicalMaterial({
-      color: 0x141416,
+    // Deep polished mahogany bevel rim
+    this.mahoganyBevelMat = new THREE.MeshPhysicalMaterial({
+      color: 0x3A0A04,
       metalness: 0.95,
       roughness: 0.12,
       clearcoat: 1.0,
@@ -162,38 +163,49 @@ class OpticalSculpture {
       reflectivity: 1.0
     });
 
-    // Exact Lime Accent: electric, saturated #C7E948 matching "How it works?" button
-    this.limeMat = new THREE.MeshPhysicalMaterial({
-      color: 0xC7E948,
-      roughness: 0.24,
-      metalness: 0.02,
-      clearcoat: 0.65,
-      clearcoatRoughness: 0.12,
-      envMapIntensity: 0.08, // Eliminates white studio glare washing out saturation
-      emissive: 0x6E8224,
+    // Saturated fiery electric orange (#FF5500)
+    this.orangeMat = new THREE.MeshPhysicalMaterial({
+      color: 0xFF5500,
+      roughness: 0.22,
+      metalness: 0.03,
+      clearcoat: 0.7,
+      clearcoatRoughness: 0.1,
+      envMapIntensity: 0.1,
+      emissive: 0xFF2200,
       emissiveIntensity: 0.55
     });
 
+    // Ruby Vermilion Red Accent
+    this.redAccentMat = new THREE.MeshPhysicalMaterial({
+      color: 0xE52521,
+      roughness: 0.24,
+      metalness: 0.1,
+      clearcoat: 0.7,
+      emissive: 0x880000,
+      emissiveIntensity: 0.45
+    });
+
     // =========================================================================
-    // 2. OUTER PRECISION GIMBAL RING (Ink Black #0E0E0F)
+    // 2. OUTER PRECISION GIMBAL RING (Obsidian Red #220603 with Radar Ticks)
     // =========================================================================
     this.outerRingGroup = new THREE.Group();
 
     // Main Torus Body
     const outerRingGeo = new THREE.TorusGeometry(1.85, 0.085, 32, 100);
-    const outerRingMesh = new THREE.Mesh(outerRingGeo, this.inkRingMat);
+    const outerRingMesh = new THREE.Mesh(outerRingGeo, this.obsidianRingMat);
     this.outerRingGroup.add(outerRingMesh);
 
-    // Ink Bevel Rim
+    // Mahogany Bevel Rim
     const outerRimGeo = new THREE.TorusGeometry(1.92, 0.018, 16, 100);
-    const outerRimMesh = new THREE.Mesh(outerRimGeo, this.inkBevelMat);
+    const outerRimMesh = new THREE.Mesh(outerRimGeo, this.mahoganyBevelMat);
     this.outerRingGroup.add(outerRimMesh);
 
-    // 4-Quadrant Precision Index Dots
-    for (let i = 0; i < 4; i++) {
-      const angle = (i / 4) * Math.PI * 2;
-      const dotGeo = new THREE.SphereGeometry(0.045, 16, 16);
-      const dotMesh = new THREE.Mesh(dotGeo, i === 0 ? this.limeMat : this.inkBevelMat);
+    // 8-Directional Tactical Emergency Radar Markers (Orange & Vermilion)
+    for (let i = 0; i < 8; i++) {
+      const angle = (i / 8) * Math.PI * 2;
+      const isCardinal = i % 2 === 0;
+      const dotGeo = new THREE.SphereGeometry(isCardinal ? 0.048 : 0.026, 16, 16);
+      const dotMesh = new THREE.Mesh(dotGeo, isCardinal ? (i === 0 ? this.orangeMat : this.redAccentMat) : this.mahoganyBevelMat);
       dotMesh.position.set(Math.cos(angle) * 1.85, Math.sin(angle) * 1.85, 0.06);
       this.outerRingGroup.add(dotMesh);
     }
@@ -201,17 +213,17 @@ class OpticalSculpture {
     this.masterGroup.add(this.outerRingGroup);
 
     // =========================================================================
-    // 3. MID GIMBAL RING (Ink Black #0E0E0F)
+    // 3. MID GIMBAL RING (Doppler Radar Sweep Ring)
     // =========================================================================
     this.midRingGroup = new THREE.Group();
 
     const midRingGeo = new THREE.TorusGeometry(1.55, 0.055, 24, 90);
-    const midRingMesh = new THREE.Mesh(midRingGeo, this.inkRingMat);
+    const midRingMesh = new THREE.Mesh(midRingGeo, this.obsidianRingMat);
     this.midRingGroup.add(midRingMesh);
 
     // Inner Orbit Ring
     const innerOrbitRingGeo = new THREE.TorusGeometry(1.48, 0.02, 16, 90);
-    const innerOrbitRingMesh = new THREE.Mesh(innerOrbitRingGeo, this.inkBevelMat);
+    const innerOrbitRingMesh = new THREE.Mesh(innerOrbitRingGeo, this.mahoganyBevelMat);
     this.midRingGroup.add(innerOrbitRingMesh);
 
     this.midRingGroup.rotation.x = Math.PI / 3.8;
@@ -219,7 +231,7 @@ class OpticalSculpture {
     this.masterGroup.add(this.midRingGroup);
 
     // =========================================================================
-    // 4. PRECISION OPTICAL APERTURE & GLASS RING
+    // 4. PRECISION OPTICAL APERTURE & GLASS SHIELD
     // =========================================================================
     this.lensGroup = new THREE.Group();
 
@@ -241,42 +253,46 @@ class OpticalSculpture {
 
     // Precision Aperture Diaphragm Collar
     const apertureBandGeo = new THREE.CylinderGeometry(1.18, 1.18, 0.06, 64, 1, true);
-    const apertureBandMesh = new THREE.Mesh(apertureBandGeo, this.inkBevelMat);
+    const apertureBandMesh = new THREE.Mesh(apertureBandGeo, this.mahoganyBevelMat);
     apertureBandMesh.rotation.x = Math.PI / 2;
     this.lensGroup.add(apertureBandMesh);
 
-    // Concentric Fine Aperture Rings
-    const apRing1 = new THREE.Mesh(new THREE.TorusGeometry(0.85, 0.014, 16, 64), this.limeMat);
+    // Concentric Fine Aperture Rings (Fiery Orange & Ruby Red)
+    const apRing1 = new THREE.Mesh(new THREE.TorusGeometry(0.85, 0.014, 16, 64), this.orangeMat);
     this.lensGroup.add(apRing1);
 
-    const apRing2 = new THREE.Mesh(new THREE.TorusGeometry(1.02, 0.01, 16, 64), this.inkBevelMat);
+    const apRing2 = new THREE.Mesh(new THREE.TorusGeometry(1.02, 0.01, 16, 64), this.redAccentMat);
     this.lensGroup.add(apRing2);
 
-
-
     // =========================================================================
-    // 5. INNER FOCAL CORE: Punchy, Saturated Lime Jewel Nucleus (#C7E948)
+    // 5. INNER EMERGENCY BEACON CORE: Incandescent Magma Orb (#FF5500)
     // =========================================================================
     const coreGeo = new THREE.SphereGeometry(0.52, 48, 48);
-    this.coreMesh = new THREE.Mesh(coreGeo, this.limeMat);
+    this.coreMesh = new THREE.Mesh(coreGeo, this.orangeMat);
     this.lensGroup.add(this.coreMesh);
 
     this.masterGroup.add(this.lensGroup);
 
     // =========================================================================
-    // 6. MINIMAL LASER RETICLE (Clean cardinal brackets)
+    // 6. TACTICAL GPS / RADAR TARGETING RETICLE
     // =========================================================================
     this.reticleGroup = new THREE.Group();
-    const reticleMat = new THREE.MeshBasicMaterial({ color: 0xC7E948, transparent: true, opacity: 0.75 });
+    const reticleMat = new THREE.MeshBasicMaterial({ color: 0xFF5500, transparent: true, opacity: 0.85 });
 
-    // Center crosshair
-    const ch = new THREE.Mesh(new THREE.PlaneGeometry(0.12, 0.012), reticleMat);
+    // Center crosshairs
+    const ch = new THREE.Mesh(new THREE.PlaneGeometry(0.18, 0.014), reticleMat);
     ch.position.z = 0.44;
     this.reticleGroup.add(ch);
 
-    const cv = new THREE.Mesh(new THREE.PlaneGeometry(0.012, 0.12), reticleMat);
+    const cv = new THREE.Mesh(new THREE.PlaneGeometry(0.014, 0.18), reticleMat);
     cv.position.z = 0.44;
     this.reticleGroup.add(cv);
+
+    // Concentric GPS targeting ring
+    const targetRingGeo = new THREE.RingGeometry(0.24, 0.255, 32);
+    const targetRingMesh = new THREE.Mesh(targetRingGeo, reticleMat);
+    targetRingMesh.position.z = 0.44;
+    this.reticleGroup.add(targetRingMesh);
 
     this.masterGroup.add(this.reticleGroup);
   }
@@ -368,19 +384,26 @@ class OpticalSculpture {
     // Subtle gentle floating on the Y axis (very subtle amplitude so it stays clear of the title)
     this.masterGroup.position.y = Math.sin(time * 1.2) * 0.02;
 
-    // 3. Counter-rotation of the inner ring revolving in the opposite direction
-    this.midRingGroup.rotation.y -= 0.0058;
-    this.midRingGroup.rotation.z -= 0.0035;
+    // 3. Counter-rotation Doppler radar sweep of the inner ring
+    this.midRingGroup.rotation.y -= 0.0092;
+    this.midRingGroup.rotation.z -= 0.0048;
 
-    // 4. Subtle optical core respiration (breathing focus effect)
-    const scalePulse = 1.0 + Math.sin(time * 2.0) * 0.04;
-    this.coreMesh.scale.set(scalePulse, scalePulse, scalePulse);
+    // 4. Crisis Emergency Beacon Cadence (urgent flashing pulse & illumination)
+    const beaconPulse = 1.0 + Math.sin(time * 3.6) * 0.08;
+    this.coreMesh.scale.set(beaconPulse, beaconPulse, beaconPulse);
+    if (this.orangeMat) {
+      this.orangeMat.emissiveIntensity = 0.55 + Math.sin(time * 3.6) * 0.35;
+    }
+    if (this.orangeLight) {
+      this.orangeLight.intensity = 3.6 + Math.sin(time * 3.6) * 1.5;
+    }
 
-    // 5. Reticle crosshair pulse
+    // 5. Tactical GPS Reticle pulse
     if (this.reticleGroup) {
-      const reticlePulse = 0.7 + Math.sin(time * 3.0) * 0.25;
-      this.reticleGroup.children[0].material.opacity = reticlePulse;
-      this.reticleGroup.children[1].material.opacity = reticlePulse;
+      const reticlePulse = 0.65 + Math.sin(time * 4.2) * 0.3;
+      this.reticleGroup.children.forEach(child => {
+        if (child.material) child.material.opacity = reticlePulse;
+      });
     }
 
     this.renderer.render(this.scene, this.camera);
@@ -529,7 +552,6 @@ class AppUI {
     };
 
     if (openBtn) openBtn.addEventListener('click', openModal);
-    if (navGetStartedBtn) navGetStartedBtn.addEventListener('click', openModal);
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
     modal.addEventListener('click', (e) => {
@@ -593,7 +615,7 @@ class AppUI {
         const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
         if (statusText) {
           statusText.textContent = `${file.name} (${sizeMb} MB) • Uploaded successfully`;
-          statusText.style.color = '#0E0E0F';
+          statusText.style.color = '#1C0502';
           statusText.style.fontWeight = '700';
         }
       };
