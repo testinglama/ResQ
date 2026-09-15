@@ -26,10 +26,16 @@
         <!-- FLOATING PILL NAVBAR -->
         <header class="navbar-wrapper">
           <nav class="nav-pill" aria-label="Main Navigation">
-            <a href="#" class="nav-brand">
+            <a href="#zone-top" class="nav-brand">
               <span class="brand-dot"></span>
               <span class="brand-name">RESQ</span>
             </a>
+
+            <div class="nav-links">
+              <a href="#zone-top" class="nav-link">Emergency Portal</a>
+              <a href="#dashboard-section" class="nav-link">Disaster Radar</a>
+              <a href="#blood-donor-section" class="nav-link">Blood Donors</a>
+            </div>
 
             <div class="nav-actions">
               <a href="tel:9263532588" class="btn-get-started" id="nav-get-started" aria-label="Emergency Call 9263532588">
@@ -142,29 +148,29 @@
     </section>
 
     <!-- ============================================ -->
-    <!-- SECTION 3: UPLOAD PHOTOGRAPH                 -->
-    <!-- Title, subtitle, paragraph on left side      -->
-    <!-- Image preview & interactive upload on right  -->
     <!-- ============================================ -->
-    <section class="section-upload" id="upload-section">
+    <!-- SECTION 2 / 3: USHA MARTIN UNIVERSITY        -->
+    <!-- DISASTER INFORMATION DASHBOARD               -->
+    <!-- ============================================ -->
+    <section class="section-upload" id="dashboard-section">
       <div class="zone-inner upload-inner">
         <div class="upload-split-grid">
           
-          <!-- LEFT SIDE: Title, Subtitle, and Paragraph -->
+          <!-- LEFT SIDE: Title, Subtitle, and Atmospheric Readouts -->
           <div class="upload-col-left">
             <div class="upload-badge">
               <span class="badge-dot"></span>
-              <span>DIRECT INGESTION PIPELINE</span>
+              <span>LIVE TELEMETRY FEED • USHA MARTIN UNIVERSITY (RANCHI)</span>
             </div>
             
-            <h2 class="upload-title">UPLOAD PHOTOGRAPH.</h2>
+            <h2 class="upload-title">DISASTER INFORMATION DASHBOARD.</h2>
             
             <h3 class="upload-subtitle">
-              Instant lossless cloud synchronization directly mapped to your daylight studio slot.
+              Real-time atmospheric monitoring, severe weather radar, and emergency triage for UMU Angara Campus.
             </h3>
             
             <p class="upload-paragraph">
-              Whether you are shooting on tethered medium-format Hasselblad bodies or delivering high-res 35mm proofs, upload your RAW and calibrated frames here. Our automated color pipeline extracts embedded EXIF profiles, applies calibrated studio daylight profiles, and broadcasts secure client viewing galleries in real time.
+              Automated sensor grid monitoring lightning strikes, flash-flood risks along the Subarnarekha river belt, and extreme monsoonal downpours. Synchronized directly with Jharkhand State Disaster Management Authority (JSDMA) and campus emergency response teams to safeguard students and faculty in real time.
             </p>
 
             <div class="dotted-underline"></div>
@@ -173,59 +179,304 @@
               <div class="upload-spec-item">
                 <div class="spec-meta-header">
                   <span class="spec-index">/01</span>
-                  <span class="spec-label">SUPPORTED FORMATS</span>
+                  <span class="spec-label">CAMPUS THREAT LEVEL</span>
                 </div>
-                <span class="spec-val">RAW • ARW • CR3 • DNG • TIFF • JPEG</span>
+                <span class="spec-val"><span class="status-pill status-amber">LEVEL 2: AMBER</span> Lightning &amp; Monsoonal Squall</span>
               </div>
               <div class="upload-spec-item">
                 <div class="spec-meta-header">
                   <span class="spec-index">/02</span>
-                  <span class="spec-label">PIPELINE SPEED</span>
+                  <span class="spec-label">ATMOSPHERIC SENSORS</span>
                 </div>
-                <span class="spec-val">Lossless 10Gbps Dedicated Uplink</span>
+                <span class="spec-val">Wind: 26 km/h ENE • Rain: 18mm/h • Lightning: 4 Strikes (&lt;6km)</span>
               </div>
               <div class="upload-spec-item">
                 <div class="spec-meta-header">
                   <span class="spec-index">/03</span>
-                  <span class="spec-label">COLOR SCIENCE</span>
+                  <span class="spec-label">SAFE ASSEMBLY HAVEN</span>
                 </div>
-                <span class="spec-val">Calibrated Display P3 &amp; Adobe RGB</span>
+                <span class="spec-val">Main Convocation Ground &amp; Central Quadrangle</span>
+              </div>
+              <div class="upload-spec-item">
+                <div class="spec-meta-header">
+                  <span class="spec-index">/04</span>
+                  <span class="spec-label">24/7 UMU DISPATCH</span>
+                </div>
+                <span class="spec-val"><a href="tel:9263532588" class="spec-link">Dial 9263532588 (Immediate Assistance)</a></span>
               </div>
             </div>
           </div>
 
-          <!-- RIGHT SIDE: Image Preview & Interactive Upload Area -->
+          <!-- RIGHT SIDE: Interactive UMU Campus Zone Grid & Threat Reporter -->
           <div class="upload-col-right">
-            <div class="upload-dropzone-card" id="upload-dropzone">
+            <div class="dashboard-card">
               
-              <!-- Hidden File Input -->
-              <input type="file" id="photo-file-input" class="photo-file-input" accept="image/*" />
-              
-              <!-- Live Image Preview Container -->
-              <div class="upload-preview-frame">
-                <img id="upload-preview-img" class="upload-preview-img" src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=900&auto=format&fit=crop&q=85" alt="Uploaded studio photograph preview" />
+              <!-- Dashboard Header Bar with Live Blinking Sync -->
+              <div class="dash-card-header">
+                <div class="dash-title-wrap">
+                  <span class="radar-dot"></span>
+                  <span class="dash-station-name">UMU ANGARA RADAR STATION</span>
+                </div>
+                <span class="dash-sync-badge">SYNCED: LIVE</span>
               </div>
 
-              <!-- Interactive Dropzone Control Bar -->
-              <div class="upload-controls-bar">
-                <div class="upload-prompt-text">
-                  <span class="upload-action-title">Drag &amp; drop frame or choose file</span>
-                  <span class="upload-action-sub" id="upload-file-status">Lossless RAW / JPG up to 250MB</span>
+              <!-- Campus Zones Grid -->
+              <div class="campus-zones-grid">
+                <div class="zone-status-box zone-safe">
+                  <div class="zone-box-top">
+                    <span class="zone-indicator"></span>
+                    <span class="zone-code">ZONE A</span>
+                  </div>
+                  <h4 class="zone-name">Academic Blocks A &amp; B</h4>
+                  <p class="zone-status-text">Operational • Power Grid Normal</p>
                 </div>
+
+                <div class="zone-status-box zone-warning">
+                  <div class="zone-box-top">
+                    <span class="zone-indicator"></span>
+                    <span class="zone-code">ZONE B</span>
+                  </div>
+                  <h4 class="zone-name">Engineering &amp; Labs</h4>
+                  <p class="zone-status-text">Standby • Surge Dampers Active</p>
+                </div>
+
+                <div class="zone-status-box zone-alert">
+                  <div class="zone-box-top">
+                    <span class="zone-indicator"></span>
+                    <span class="zone-code">ZONE C</span>
+                  </div>
+                  <h4 class="zone-name">Sports Arena &amp; Grounds</h4>
+                  <p class="zone-status-text">Restricted • Lightning Risk</p>
+                </div>
+
+                <div class="zone-status-box zone-safe">
+                  <div class="zone-box-top">
+                    <span class="zone-indicator"></span>
+                    <span class="zone-code">ZONE D</span>
+                  </div>
+                  <h4 class="zone-name">Hostels &amp; Dining Hall</h4>
+                  <p class="zone-status-text">Safe Haven • Monitored 24/7</p>
+                </div>
+              </div>
+
+              <!-- Interactive Incident Upload Sub-Module -->
+              <div class="dash-incident-uploader" id="upload-dropzone">
+                <input type="file" id="photo-file-input" class="photo-file-input" accept="image/*" />
                 
-                <button type="button" class="btn-upload-action" id="btn-trigger-upload">
-                  <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
-                    <path d="M10 3a1 1 0 0 1 1 1v7.586l2.293-2.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 1 1 1.414-1.414L9 11.586V4a1 1 0 0 1 1-1z" />
-                    <path d="M4 14a1 1 0 0 1 1 1v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a1 1 0 1 1 2 0v1a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-1a1 1 0 0 1 1-1z" />
-                  </svg>
-                  <span>Select File</span>
-                </button>
+                <div class="dash-upload-header">
+                  <span class="dash-sub-title">REPORT HAZARD EVIDENCE (OPTIONAL)</span>
+                  <span class="upload-action-sub" id="upload-file-status">Upload photo/footage of campus hazard</span>
+                </div>
+
+                <div class="dash-preview-wrap" id="dash-preview-wrap" style="display: none;">
+                  <img id="upload-preview-img" class="dash-preview-thumb" alt="Hazard Evidence Preview" />
+                </div>
+
+                <div class="dash-upload-actions">
+                  <button type="button" class="btn-upload-action" id="btn-trigger-upload">
+                    <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                      <path d="M10 3a1 1 0 0 1 1 1v7.586l2.293-2.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 1 1 1.414-1.414L9 11.586V4a1 1 0 0 1 1-1z" />
+                      <path d="M4 14a1 1 0 0 1 1 1v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a1 1 0 1 1 2 0v1a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-1a1 1 0 0 1 1-1z" />
+                    </svg>
+                    <span>Attach Evidence</span>
+                  </button>
+
+                  <a href="tel:9263532588" class="btn-dash-call">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                    <span>Dispatch: 9263532588</span>
+                  </a>
+                </div>
               </div>
 
             </div>
           </div>
 
         </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION 3: EMERGENCY BLOOD DONOR NETWORK     -->
+    <!-- ============================================ -->
+    <section class="section-blood-donor" id="blood-donor-section">
+      <div class="zone-inner blood-donor-inner">
+        
+        <!-- Section Header -->
+        <div class="blood-header-wrap">
+          <div class="blood-badge">
+            <span class="blood-dot"></span>
+            <span>CAMPUS &amp; REGIONAL LIFEGUARD • EMERGENCY BLOOD REGISTRY</span>
+          </div>
+          <h2 class="blood-title">EMERGENCY BLOOD DONOR NETWORK.</h2>
+          <p class="blood-subtitle">
+            Synchronized emergency blood inventory, on-call student/staff donor dispatch, and life-critical transfusion support for Usha Martin University and Ranchi medical trauma centers.
+          </p>
+        </div>
+
+        <!-- Live Blood Inventory Matrix (6 Cards) -->
+        <div class="blood-inventory-grid">
+          
+          <div class="blood-card blood-critical">
+            <div class="blood-card-top">
+              <div class="blood-type-badge">O-</div>
+              <span class="blood-status-tag status-tag-critical">CRITICAL DEFICIT</span>
+            </div>
+            <div class="blood-units">2 Units Available</div>
+            <p class="blood-card-desc">Universal red-cell donor. Critical requirement for campus trauma &amp; ICU.</p>
+            <a href="tel:9263532588" class="btn-blood-sos">Request O- Blood</a>
+          </div>
+
+          <div class="blood-card blood-warning">
+            <div class="blood-card-top">
+              <div class="blood-type-badge">O+</div>
+              <span class="blood-status-tag status-tag-warning">LOW RESERVE</span>
+            </div>
+            <div class="blood-units">7 Units Available</div>
+            <p class="blood-card-desc">Elevated demand across campus clinics and Sadar Hospital.</p>
+            <a href="tel:9263532588" class="btn-blood-sos">Request O+ Blood</a>
+          </div>
+
+          <div class="blood-card blood-stable">
+            <div class="blood-card-top">
+              <div class="blood-type-badge">A+</div>
+              <span class="blood-status-tag status-tag-stable">STABLE STOCK</span>
+            </div>
+            <div class="blood-units">14 Units Available</div>
+            <p class="blood-card-desc">Verified stock maintained at RIMS Blood Bank &amp; UMU Infirmary.</p>
+            <a href="tel:9263532588" class="btn-blood-sos">Request A+ Blood</a>
+          </div>
+
+          <div class="blood-card blood-stable">
+            <div class="blood-card-top">
+              <div class="blood-type-badge">B+</div>
+              <span class="blood-status-tag status-tag-stable">STABLE STOCK</span>
+            </div>
+            <div class="blood-units">18 Units Available</div>
+            <p class="blood-card-desc">Sufficient reserves. Active on-call volunteer donors on standby.</p>
+            <a href="tel:9263532588" class="btn-blood-sos">Request B+ Blood</a>
+          </div>
+
+          <div class="blood-card blood-critical">
+            <div class="blood-card-top">
+              <div class="blood-type-badge">AB-</div>
+              <span class="blood-status-tag status-tag-critical">CRITICAL DEFICIT</span>
+            </div>
+            <div class="blood-units">1 Unit Available</div>
+            <p class="blood-card-desc">Rare blood group. Immediate voluntary donors urgently requested.</p>
+            <a href="tel:9263532588" class="btn-blood-sos">Request AB- Blood</a>
+          </div>
+
+          <div class="blood-card blood-warning">
+            <div class="blood-card-top">
+              <div class="blood-type-badge">AB+</div>
+              <span class="blood-status-tag status-tag-warning">MODERATE</span>
+            </div>
+            <div class="blood-units">6 Units Available</div>
+            <p class="blood-card-desc">Universal plasma donor. Monitored for upcoming clinical needs.</p>
+            <a href="tel:9263532588" class="btn-blood-sos">Request AB+ Blood</a>
+          </div>
+
+        </div>
+
+        <!-- Interactive Split: Volunteer Donor Registration & 24/7 Hotline -->
+        <div class="blood-action-split">
+          
+          <!-- Volunteer Registration Card -->
+          <div class="donor-register-card">
+            <div class="donor-reg-header">
+              <div class="donor-reg-title-wrap">
+                <span class="reg-icon-flame">🩸</span>
+                <h3 class="donor-reg-title">REGISTER AS A VOLUNTEER BLOOD DONOR</h3>
+              </div>
+              <p class="donor-reg-sub">Join Usha Martin University’s on-call student &amp; faculty life-saving squad.</p>
+            </div>
+
+            <form class="donor-form" id="donor-register-form">
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="donor-name" class="form-label">Full Name</label>
+                  <input type="text" id="donor-name" class="form-input" placeholder="e.g. Aryan Kushwaha" required />
+                </div>
+                <div class="form-group">
+                  <label for="donor-group" class="form-label">Blood Group</label>
+                  <select id="donor-group" class="form-select" required>
+                    <option value="" disabled selected>Select Blood Group</option>
+                    <option value="O-">O Negative (O-)</option>
+                    <option value="O+">O Positive (O+)</option>
+                    <option value="A-">A Negative (A-)</option>
+                    <option value="A+">A Positive (A+)</option>
+                    <option value="B-">B Negative (B-)</option>
+                    <option value="B+">B Positive (B+)</option>
+                    <option value="AB-">AB Negative (AB-)</option>
+                    <option value="AB+">AB Positive (AB+)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="donor-phone" class="form-label">Mobile Number</label>
+                  <input type="tel" id="donor-phone" class="form-input" placeholder="e.g. 9263532588" required />
+                </div>
+                <div class="form-group">
+                  <label for="donor-location" class="form-label">Campus Location / Hostel</label>
+                  <input type="text" id="donor-location" class="form-input" placeholder="e.g. Hostel Block B, Room 204" required />
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn-donor-submit" id="btn-submit-donor">
+                  <span>Confirm Donor Registration</span>
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 8h10M9 4l4 4-4 4"/>
+                  </svg>
+                </button>
+                <span class="donor-privacy-note">🔒 Contact details are strictly restricted to verified emergency medical dispatchers.</span>
+              </div>
+            </form>
+          </div>
+
+          <!-- Emergency Hotline & Medical Partner Card -->
+          <div class="blood-hotline-card">
+            <div>
+              <div class="hotline-badge">
+                <span class="hotline-dot"></span>
+                <span>EMERGENCY TRANSFUSION HOTLINE</span>
+              </div>
+              
+              <h3 class="hotline-title">NEED BLOOD IMMEDIATELY?</h3>
+              
+              <p class="hotline-desc">
+                For active trauma, surgical emergencies, or critical ICU transfusions, connect instantly to the UMU Medical Response &amp; Ranchi Central Blood Bank coordinator.
+              </p>
+            </div>
+
+            <a href="tel:9263532588" class="btn-hotline-call" aria-label="Call 24/7 Emergency Blood Dispatch at 9263532588">
+              <div class="hotline-icon-wrap">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+              </div>
+              <div class="hotline-btn-text">
+                <span class="hotline-btn-label">24/7 EMERGENCY BLOOD DISPATCH</span>
+                <strong class="hotline-btn-num">Call: 9263532588</strong>
+              </div>
+            </a>
+
+            <div class="hotline-partners">
+              <span class="partner-label">AFFILIATED BLOOD REPOSITORIES:</span>
+              <ul class="partner-list">
+                <li>• RIMS Blood Bank, Ranchi (24/7)</li>
+                <li>• Sadar Hospital Trauma Unit, Ranchi</li>
+                <li>• UMU Angara Campus Health Center</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </section>
 

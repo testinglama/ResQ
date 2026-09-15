@@ -436,6 +436,7 @@ class AppUI {
     this.initLockBooking();
     this.initHowItWorksModal();
     this.initPhotographUpload();
+    this.initDonorForm();
     this.initCountdownTimer();
     this.initSmoothScroll();
     this.updateSummary();
@@ -606,6 +607,8 @@ class AppUI {
       reader.onload = (e) => {
         if (previewImg) {
           previewImg.style.opacity = '0';
+          const previewWrap = document.getElementById('dash-preview-wrap');
+          if (previewWrap) previewWrap.style.display = 'block';
           setTimeout(() => {
             previewImg.src = e.target.result;
             previewImg.style.opacity = '1';
@@ -653,6 +656,32 @@ class AppUI {
       if (dt && dt.files && dt.files[0]) {
         handleFile(dt.files[0]);
       }
+    });
+  }
+
+  initDonorForm() {
+    const form = document.getElementById('donor-register-form');
+    const toast = document.getElementById('booking-toast');
+    const toastTitle = toast?.querySelector('.toast-title');
+    const toastDesc = document.getElementById('toast-desc');
+
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('donor-name')?.value || 'Volunteer';
+      const group = document.getElementById('donor-group')?.value || 'Donor';
+
+      if (toast) {
+        if (toastTitle) toastTitle.textContent = 'Donor Registered Successfully!';
+        if (toastDesc) toastDesc.textContent = `Thank you, ${name} (${group})! You are registered in the UMU RESQ Emergency Blood Network.`;
+        toast.classList.add('active');
+        setTimeout(() => {
+          toast.classList.remove('active');
+        }, 5000);
+      }
+
+      form.reset();
     });
   }
 
