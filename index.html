@@ -36,17 +36,58 @@
               <a href="#dashboard-section" class="nav-link">Disaster Radar</a>
               <a href="#blood-donor-section" class="nav-link">Blood Donors</a>
               <a href="#incident-section" class="nav-link">Report Incident</a>
+              <a href="#resources-section" class="nav-link">Resource Locator</a>
             </div>
 
             <div class="nav-actions">
               <a href="tel:9263532588" class="btn-get-started" id="nav-get-started" aria-label="Emergency Call 9263532588">
-                <span>Call: 9263532588</span>
+                <span class="nav-call-full">Call: 9263532588</span>
+                <span class="nav-call-short">SOS CALL</span>
                 <svg class="btn-arrow" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M3 8h10M9 4l4 4-4 4"/>
                 </svg>
               </a>
+              <button class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+              </button>
             </div>
           </nav>
+
+          <!-- MOBILE NAVIGATION DRAWER -->
+          <div class="mobile-nav-drawer" id="mobile-nav-drawer" aria-hidden="true">
+            <div class="mobile-nav-links">
+              <a href="#zone-top" class="mobile-nav-link">
+                <span class="mobile-link-num">01</span>
+                <span>Emergency Command Portal</span>
+              </a>
+              <a href="#dashboard-section" class="mobile-nav-link">
+                <span class="mobile-link-num">02</span>
+                <span>UMU Disaster Radar</span>
+              </a>
+              <a href="#blood-donor-section" class="mobile-nav-link">
+                <span class="mobile-link-num">03</span>
+                <span>Emergency Blood Donors</span>
+              </a>
+              <a href="#incident-section" class="mobile-nav-link">
+                <span class="mobile-link-num">04</span>
+                <span>Report Campus Incident</span>
+              </a>
+              <a href="#resources-section" class="mobile-nav-link">
+                <span class="mobile-link-num">05</span>
+                <span>Emergency Resource Locator</span>
+              </a>
+            </div>
+            <div class="mobile-nav-cta-wrap">
+              <a href="tel:9263532588" class="mobile-nav-emergency-btn">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                <span>24/7 HOTLINE: 9263532588</span>
+              </a>
+            </div>
+          </div>
         </header>
 
         <!-- FULL-BLEED WORDMARK / H1 -->
@@ -718,6 +759,388 @@
       </div>
     </section>
 
+    <!-- ============================================ -->
+    <!-- SECTION 5: EMERGENCY RESOURCE LOCATOR       -->
+    <!-- ============================================ -->
+    <section class="section-resources" id="resources-section">
+      <div class="resources-inner">
+
+        <!-- Section Header -->
+        <div class="resources-header-wrap">
+          <div class="resources-badge">
+            <span class="resources-dot"></span>
+            <span>CAMPUS & REGIONAL ASSET GRID • LIVE GPS RADAR</span>
+          </div>
+          <h2 class="resources-title">EMERGENCY RESOURCE LOCATOR.</h2>
+          <p class="resources-subtitle">
+            Instant proximity mapping and verified telemetry of critical campus emergency hardware — automated external defibrillators (AEDs), fire suppression depots, trauma rescue bags, extreme weather storm shelters, and standby intensive care ambulances across UMU Angara Campus & Ranchi Medical Network.
+          </p>
+        </div>
+
+        <!-- Controls: Search + Zone Filter -->
+        <div class="resources-controls-bar">
+          <div class="resources-search-wrap">
+            <svg class="search-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="9" r="7"></circle>
+              <line x1="14" y1="14" x2="18.5" y2="18.5"></line>
+            </svg>
+            <input type="text" id="resource-search-input" class="resource-search-input" placeholder="Search equipment (AED, extinguisher, oxygen, shelter)..." aria-label="Search emergency resources" />
+          </div>
+
+          <div class="resources-zone-select-wrap">
+            <select id="resource-zone-select" class="resource-zone-select" aria-label="Filter by Campus Zone">
+              <option value="all">All Campus Zones</option>
+              <option value="zone-a">Zone A: Academic Blocks</option>
+              <option value="zone-b">Zone B: Engineering & Labs</option>
+              <option value="zone-c">Zone C: Sports Complex</option>
+              <option value="zone-d">Zone D: Hostels & Dining</option>
+              <option value="perimeter">Perimeter & Gate 1</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Category Chips Filter -->
+        <div class="resources-chips-scroll">
+          <div class="resources-chips-wrap">
+            <button class="resource-chip active" data-category="all">
+              <span class="chip-icon">🏥</span> All Assets (6)
+            </button>
+            <button class="resource-chip" data-category="medical">
+              <span class="chip-icon">⚡</span> AED &amp; Trauma (2)
+            </button>
+            <button class="resource-chip" data-category="fire">
+              <span class="chip-icon">🧯</span> Fire &amp; Hazard (2)
+            </button>
+            <button class="resource-chip" data-category="ambulance">
+              <span class="chip-icon">🚑</span> Ambulance (1)
+            </button>
+            <button class="resource-chip" data-category="shelter">
+              <span class="chip-icon">🛡️</span> Storm Shelter (1)
+            </button>
+          </div>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="resources-grid" id="resources-grid">
+          
+          <!-- Card 1: Central AED -->
+          <div class="resource-card" data-category="medical" data-zone="zone-a" data-keywords="aed defibrillator medical trauma heart cpr philips heartstart tourniquet stretcher">
+            <div class="resource-card-header">
+              <span class="resource-type-pill pill-medical">⚡ AED &amp; Trauma</span>
+              <span class="resource-status-badge status-ready">● OPERATIONAL (100% BATTERY)</span>
+            </div>
+            <h3 class="resource-name">UMU Central AED Hub &amp; Advanced Trauma Unit</h3>
+            <p class="resource-location">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Zone A • Academic Block Ground Floor (Next to Dean's Office / Reception)
+            </p>
+            <div class="resource-equipment-box">
+              <div class="equip-label">EQUIPMENT ON-SITE:</div>
+              <p class="equip-desc">Philips HeartStart FRx Defibrillator, Adult/Paediatric Smart Pads, Rapid Tourniquets, Burn Dressing Pack, Cervical Collar, Heavy-Duty Stretcher.</p>
+            </div>
+            <div class="resource-proximity-meta">
+              <span class="proximity-dist">📍 ~95m away</span>
+              <span class="proximity-time">⏱️ 1 min walking</span>
+            </div>
+            <div class="resource-actions-row">
+              <button class="btn-route-action" data-title="UMU Central AED Hub" data-loc="Zone A Ground Floor North Lobby" data-dist="95m" data-time="1 min" data-instructions="Head North through Central Quadrangle → Enter Academic Block A through main glass doors → AED Station is mounted beside the Main Reception Desk on your left.">
+                <span>Route Guidance</span>
+              </button>
+              <a href="tel:9263532588" class="btn-resource-call" aria-label="Emergency Call 9263532588">
+                <span>Call: 9263532588</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2: Fire Suppression -->
+          <div class="resource-card" data-category="fire" data-zone="zone-b" data-keywords="fire extinguisher co2 chemical powder hazard blank smoke explosion eye wash">
+            <div class="resource-card-header">
+              <span class="resource-type-pill pill-fire">🧯 Fire &amp; Hazard</span>
+              <span class="resource-status-badge status-ready">● CREW CERTIFIED</span>
+            </div>
+            <h3 class="resource-name">High-Voltage &amp; Chemical Fire Suppression Depot</h3>
+            <p class="resource-location">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Zone B • Engineering &amp; Chemistry Wing (North Corridor G-08)
+            </p>
+            <div class="resource-equipment-box">
+              <div class="equip-label">EQUIPMENT ON-SITE:</div>
+              <p class="equip-desc">2x 9kg CO2 Extinguishers, Class D Metal/Electrical Powders, Emergency Eye-Wash Station, Chemical Neutralizer Blankets, High-Heat Protective Suits.</p>
+            </div>
+            <div class="resource-proximity-meta">
+              <span class="proximity-dist">📍 ~180m away</span>
+              <span class="proximity-time">⏱️ 2.5 min walking</span>
+            </div>
+            <div class="resource-actions-row">
+              <button class="btn-route-action" data-title="Chemical Fire Depot" data-loc="Zone B Engineering Wing G-08" data-dist="180m" data-time="2.5 min" data-instructions="Walk East past the Engineering Workshop → Take Ground Floor North Corridor → Depot is marked with high-visibility luminescent red signage outside Room G-08.">
+                <span>Route Guidance</span>
+              </button>
+              <a href="tel:9263532588" class="btn-resource-call" aria-label="Emergency Call 9263532588">
+                <span>Call: 9263532588</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3: ALS Ambulance -->
+          <div class="resource-card" data-category="ambulance" data-zone="perimeter" data-keywords="ambulance van paramedic oxygen ventilator icu transport evacuation medical trauma">
+            <div class="resource-card-header">
+              <span class="resource-type-pill pill-ambulance">🚑 Ambulance &amp; Transport</span>
+              <span class="resource-status-badge status-patrol">● 24/7 RAPID DISPATCH</span>
+            </div>
+            <h3 class="resource-name">Advanced Life Support (ALS) Trauma Ambulance 01</h3>
+            <p class="resource-location">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Main Campus Gate 01 • Emergency Vehicle Bay
+            </p>
+            <div class="resource-equipment-box">
+              <div class="equip-label">EQUIPMENT ON-SITE:</div>
+              <p class="equip-desc">ICU Mobile Transport Ventilator, High-Vacuum Suction Unit, Dual Type-D Oxygen Tanks, Full Spine Board, On-Duty Trauma Paramedic Crew.</p>
+            </div>
+            <div class="resource-proximity-meta">
+              <span class="proximity-dist">📍 ~240m away</span>
+              <span class="proximity-time">⏱️ 3 min drive on campus</span>
+            </div>
+            <div class="resource-actions-row">
+              <button class="btn-route-action" data-title="ALS Ambulance Bay" data-loc="Main Gate 01 Rapid Dispatch Bay" data-dist="240m" data-time="3 min" data-instructions="Proceed South toward the Main Campus Entrance → Turn left into the dedicated Emergency Vehicle Lane → Ambulance is stationed at Bay 1 ready for instant ignition.">
+                <span>Route Guidance</span>
+              </button>
+              <a href="tel:9263532588" class="btn-resource-call" aria-label="Emergency Call 9263532588">
+                <span>Call: 9263532588</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 4: Storm Shelter -->
+          <div class="resource-card" data-category="shelter" data-zone="zone-d" data-keywords="shelter storm bunker basement generator water food cyclone lightning safe haven">
+            <div class="resource-card-header">
+              <span class="resource-type-pill pill-shelter">🛡️ Storm Shelter</span>
+              <span class="resource-status-badge status-ready">● POWER GENERATOR ACTIVE</span>
+            </div>
+            <h3 class="resource-name">Sub-Basement Extreme Weather &amp; Storm Haven</h3>
+            <p class="resource-location">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Zone D • Hostel Block B Reinforced Lower Basement
+            </p>
+            <div class="resource-equipment-box">
+              <div class="equip-label">EQUIPMENT ON-SITE:</div>
+              <p class="equip-desc">Reinforced Concrete Shell, 40kVA Silent Generator, 2,000L Potable Water Cistern, 72-Hour Ration Caches, Satellite Radio Comms (500 Person Capacity).</p>
+            </div>
+            <div class="resource-proximity-meta">
+              <span class="proximity-dist">📍 ~320m away</span>
+              <span class="proximity-time">⏱️ 4 min walking</span>
+            </div>
+            <div class="resource-actions-row">
+              <button class="btn-route-action" data-title="Basement Storm Shelter" data-loc="Hostel Block B Sub-Basement" data-dist="320m" data-time="4 min" data-instructions="Head to Hostel Block B rear courtyard → Follow reinforced concrete emergency staircase down to Level -1 → Shelter airlock double-doors are unlocked and illuminated.">
+                <span>Route Guidance</span>
+              </button>
+              <a href="tel:9263532588" class="btn-resource-call" aria-label="Emergency Call 9263532588">
+                <span>Call: 9263532588</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 5: Sports Pavilion Trauma Post -->
+          <div class="resource-card" data-category="medical" data-zone="zone-c" data-keywords="sports heat stroke ice cooling dehydration aed splint first aid athletic">
+            <div class="resource-card-header">
+              <span class="resource-type-pill pill-medical">⚡ AED &amp; Trauma</span>
+              <span class="resource-status-badge status-ready">● ATTENDANT ON SITE</span>
+            </div>
+            <h3 class="resource-name">Sports Pavilion Heat Stroke &amp; Trauma Response Post</h3>
+            <p class="resource-location">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Zone C • Sports Arena &amp; Gymnasium West Concourse
+            </p>
+            <div class="resource-equipment-box">
+              <div class="equip-label">EQUIPMENT ON-SITE:</div>
+              <p class="equip-desc">Rapid Immersion Cooling Tubs, Electrolyte Rehydration Caches, Portable AED Unit 02, Inflatable Vacuum Splints, High-Capacity Oxygen Inhalator.</p>
+            </div>
+            <div class="resource-proximity-meta">
+              <span class="proximity-dist">📍 ~210m away</span>
+              <span class="proximity-time">⏱️ 3 min walking</span>
+            </div>
+            <div class="resource-actions-row">
+              <button class="btn-route-action" data-title="Sports Pavilion Trauma Post" data-loc="Zone C Gym West Concourse" data-dist="210m" data-time="3 min" data-instructions="Walk West towards the Stadium Pavilion → Enter through the West Athlete Gate → First Aid Room is directly opposite the Physiotherapy Center with red cross signage.">
+                <span>Route Guidance</span>
+              </button>
+              <a href="tel:9263532588" class="btn-resource-call" aria-label="Emergency Call 9263532588">
+                <span>Call: 9263532588</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 6: Perimeter Flood Outfall -->
+          <div class="resource-card" data-category="fire" data-zone="perimeter" data-keywords="flood water drainage pump sandbag monsoon river subarnarekha dewatering rescue">
+            <div class="resource-card-header">
+              <span class="resource-type-pill pill-fire">🧯 Fire &amp; Hazard</span>
+              <span class="resource-status-badge status-ready">● MONSOON READY</span>
+            </div>
+            <h3 class="resource-name">Perimeter Flood Barrier &amp; High-Flow Dewatering Depot</h3>
+            <p class="resource-location">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+              East Perimeter • Subarnarekha River Runoff Outfall
+            </p>
+            <div class="resource-equipment-box">
+              <div class="equip-label">EQUIPMENT ON-SITE:</div>
+              <p class="equip-desc">4x 15HP Diesel Submersible Dewatering Pumps, 150 Pre-Stacked Sandbags, High-Output LED Floodlight Towers, Water Rescue Throw Lines.</p>
+            </div>
+            <div class="resource-proximity-meta">
+              <span class="proximity-dist">📍 ~450m away</span>
+              <span class="proximity-time">⏱️ 6 min walking</span>
+            </div>
+            <div class="resource-actions-row">
+              <button class="btn-route-action" data-title="Perimeter Flood Depot" data-loc="East Perimeter Canal Outfall" data-dist="450m" data-time="6 min" data-instructions="Head along the East Campus Perimeter road → Pass the Maintenance Shed → Dewatering depot shed is located next to Sluice Gate 2.">
+                <span>Route Guidance</span>
+              </button>
+              <a href="tel:9263532588" class="btn-resource-call" aria-label="Emergency Call 9263532588">
+                <span>Call: 9263532588</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Empty Results Message -->
+        <div class="resources-empty-state" id="resources-empty" style="display: none;">
+          <span class="empty-icon">🔍</span>
+          <h4 class="empty-title">No Resources Matched Your Query</h4>
+          <p class="empty-desc">Try searching for "AED", "fire", "oxygen", "shelter" or switch campus zones.</p>
+          <button class="btn-reset-filters" id="btn-reset-filters">Reset All Filters</button>
+        </div>
+
+        <!-- 24/7 Dispatch Courier Card -->
+        <div class="resources-courier-card">
+          <div class="courier-left">
+            <div class="courier-badge">
+              <span class="courier-dot"></span>
+              <span>RAPID ASSET COURIER SERVICE</span>
+            </div>
+            <h3 class="courier-title">Need Emergency Equipment Delivered To You?</h3>
+            <p class="courier-desc">
+              If someone is injured, immobilized, or dealing with an active hazard, do not leave them unattended. Our on-campus emergency patrol couriers AEDs, burn packs, and oxygen cylinders to any lecture hall, lab, or hostel room within <strong>3 minutes</strong>.
+            </p>
+          </div>
+          <div class="courier-right">
+            <a href="tel:9263532588" class="btn-courier-call" aria-label="Call Dispatcher at 9263532588">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <span>CALL DISPATCHER: 9263532588</span>
+            </a>
+            <span class="courier-guarantee">⚡ Average Dispatch Response: Under 180 seconds</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SITE FOOTER: RESQ CRISIS RESPONSE GRID       -->
+    <!-- ============================================ -->
+    <footer class="site-footer" id="site-footer">
+      <div class="footer-inner">
+
+        <!-- Top Footer Grid -->
+        <div class="footer-grid">
+          
+          <!-- Col 1: Brand & Emergency Hotline -->
+          <div class="footer-col footer-col-brand">
+            <div class="footer-brand">
+              <span class="footer-brand-dot"></span>
+              <span class="footer-brand-name">RESQ</span>
+            </div>
+            <p class="footer-tagline">
+              Autonomous Crisis Telemetry, Incident Triage &amp; Rapid Life-Safety Response Network for Usha Martin University, Ranchi.
+            </p>
+            <div class="footer-hotline-card">
+              <div class="footer-hotline-label">24/7 CAMPUS EMERGENCY HOTLINE</div>
+              <a href="tel:9263532588" class="footer-hotline-btn" aria-label="Call Emergency Hotline 9263532588">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                <span>DIAL 9263532588</span>
+              </a>
+              <span class="footer-hotline-sub">Direct line to Campus Control &amp; Medical Triage</span>
+            </div>
+          </div>
+
+          <!-- Col 2: Platform Modules Navigation -->
+          <div class="footer-col">
+            <h4 class="footer-col-title">CRISIS GRID MODULES</h4>
+            <ul class="footer-links-list">
+              <li><a href="#zone-top" class="footer-link">Emergency Command Portal</a></li>
+              <li><a href="#dashboard-section" class="footer-link">UMU Disaster Weather Radar</a></li>
+              <li><a href="#blood-donor-section" class="footer-link">Emergency Blood Donor Network</a></li>
+              <li><a href="#incident-section" class="footer-link">Incident Reporting &amp; Triage</a></li>
+              <li><a href="#resources-section" class="footer-link">Emergency Resource Locator</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Campus Dispatch Zones -->
+          <div class="footer-col">
+            <h4 class="footer-col-title">CAMPUS DISPATCH ZONES</h4>
+            <ul class="footer-zones-list">
+              <li>
+                <span class="zone-pill-code">ZONE A</span>
+                <span class="zone-pill-desc">Academic Blocks &amp; Main Admin</span>
+              </li>
+              <li>
+                <span class="zone-pill-code">ZONE B</span>
+                <span class="zone-pill-desc">Engineering Labs &amp; Workshops</span>
+              </li>
+              <li>
+                <span class="zone-pill-code">ZONE C</span>
+                <span class="zone-pill-desc">Sports Complex &amp; Pavilions</span>
+              </li>
+              <li>
+                <span class="zone-pill-code">ZONE D</span>
+                <span class="zone-pill-desc">Student Hostels &amp; Dining Hall</span>
+              </li>
+              <li>
+                <span class="zone-pill-code">GATE 1</span>
+                <span class="zone-pill-desc">Rapid Evacuation &amp; Ambulance Bay</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Regional Affiliations & Live Telemetry -->
+          <div class="footer-col">
+            <h4 class="footer-col-title">REGIONAL NETWORK</h4>
+            <div class="footer-partner-pills">
+              <span class="partner-pill">Jharkhand SDMA (JSDMA)</span>
+              <span class="partner-pill">RIMS Blood Bank &amp; Trauma</span>
+              <span class="partner-pill">Sadar Hospital Ranchi</span>
+              <span class="partner-pill">Angara Fire &amp; Rescue</span>
+            </div>
+
+            <div class="footer-status-card">
+              <div class="status-top">
+                <span class="telemetry-beacon"></span>
+                <span class="status-title">TELEMETRY GRID ACTIVE</span>
+              </div>
+              <p class="status-sub">Automated satellite radar sync every 15s. All 5 campus response nodes online.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Footer Bar -->
+        <div class="footer-bottom-bar">
+          <div class="footer-copy">
+            &copy; 2026 <strong>RESQ</strong> — Usha Martin University Campus Emergency &amp; Crisis Response Grid. Built for rapid, autonomous life-safety intervention.
+          </div>
+          <div class="footer-bottom-links">
+            <a href="#zone-top" class="back-to-top-btn" aria-label="Back to top">
+              <span>Back to Top</span>
+              <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 13V3M3 8l5-5 5 5"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
   </div>
 
   <!-- ============================================ -->
@@ -767,6 +1190,57 @@
     </div>
   </div>
 
+  <!-- ============================================ -->
+  <!-- MODAL: ROUTE GUIDANCE                        -->
+  <!-- ============================================ -->
+  <div class="modal-backdrop" id="route-modal" aria-hidden="true">
+    <div class="modal-card route-modal-card">
+      <button class="modal-close-btn" id="route-modal-close" aria-label="Close route guidance modal">✕</button>
+      
+      <div class="modal-badge">
+        <span class="orange-badge-dot"></span>
+        <span id="route-modal-badge">LIVE CAMPUS NAVIGATION</span>
+      </div>
+
+      <h3 class="modal-title" id="route-modal-title">Resource Location</h3>
+      <p class="modal-subtitle" id="route-modal-loc">Zone A • Ground Floor North Lobby</p>
+
+      <div class="route-metrics-bar">
+        <div class="metric-item">
+          <span class="metric-label">DISTANCE</span>
+          <span class="metric-val" id="route-metric-dist">95m</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-item">
+          <span class="metric-label">WALKING TIME</span>
+          <span class="metric-val" id="route-metric-time">1 min</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-item">
+          <span class="metric-label">CAMPUS STATUS</span>
+          <span class="metric-val status-green">CORRIDOR CLEAR</span>
+        </div>
+      </div>
+
+      <div class="route-instructions-box">
+        <div class="instruct-label">STEP-BY-STEP LANDMARK ROUTE:</div>
+        <p class="instruct-text" id="route-modal-instruct">
+          Head North through Central Quadrangle → Enter Academic Block A through glass doors → AED Station is mounted beside the Main Reception Desk on your left.
+        </p>
+      </div>
+
+      <div class="modal-actions-route">
+        <a href="tel:9263532588" class="btn-route-call" aria-label="Call Campus Escort at 9263532588">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          <span>Call Campus Escort: 9263532588</span>
+        </a>
+        <button class="modal-close-action" id="route-modal-dismiss">Close Route</button>
+      </div>
+    </div>
+  </div>
+
   <!-- TOAST NOTIFICATION FOR SLOT LOCK -->
   <div class="toast-notification" id="booking-toast">
     <div class="toast-icon">✓</div>
@@ -775,6 +1249,28 @@
       <div class="toast-desc" id="toast-desc">Studio 01 held for you. Confirmation sent to your email.</div>
     </div>
   </div>
+
+  <!-- ============================================ -->
+  <!-- FLOATING MOBILE EMERGENCY ACTION BAR        -->
+  <!-- Appears only on mobile / small touch screens-->
+  <!-- ============================================ -->
+  <aside class="mobile-floating-bar" id="mobile-floating-bar" aria-label="Mobile Quick Emergency Bar">
+    <div class="mobile-bar-inner">
+      <div class="mobile-bar-status">
+        <span class="mobile-bar-dot"></span>
+        <div class="mobile-bar-text">
+          <span class="mobile-bar-title">UMU RESQ GRID</span>
+          <span class="mobile-bar-sub">24/7 Monitored</span>
+        </div>
+      </div>
+      <a href="tel:9263532588" class="mobile-bar-call-btn" aria-label="Call Emergency at 9263532588">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+        <span>CALL 9263532588</span>
+      </a>
+    </div>
+  </aside>
 
   <script type="module" src="./main.js"></script>
 </body>

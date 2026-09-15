@@ -27,8 +27,9 @@ class OpticalSculpture {
   init() {
     // 1. Scene & Camera
     this.scene = new THREE.Scene();
+    const isMobile = window.innerWidth < 640;
     this.camera = new THREE.PerspectiveCamera(36, this.width / this.height, 0.1, 100);
-    this.camera.position.set(0, 0, 6.7);
+    this.camera.position.set(0, 0, isMobile ? 7.8 : 6.7);
 
     // 2. High-performance WebGL Renderer with capped DPR for maximum FPS
     this.renderer = new THREE.WebGLRenderer({
@@ -382,6 +383,7 @@ class OpticalSculpture {
     if (this.width === 0 || this.height === 0) return;
 
     this.camera.aspect = this.width / this.height;
+    this.camera.position.z = window.innerWidth < 640 ? 7.8 : 6.7;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(this.width, this.height);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
@@ -467,6 +469,8 @@ class AppUI {
     this.initPhotographUpload();
     this.initDonorForm();
     this.initIncidentReporting();
+    this.initResourceLocator();
+    this.initMobileNav();
     this.initCountdownTimer();
     this.initSmoothScroll();
     this.updateSummary();
@@ -836,6 +840,201 @@ class AppUI {
         }
       });
     }
+  }
+
+  initResourceLocator() {
+    const searchInput = document.getElementById('resource-search-input');
+    const zoneSelect = document.getElementById('resource-zone-select');
+    const categoryChips = document.querySelectorAll('.resource-chip');
+    const cards = document.querySelectorAll('.resource-card');
+    const emptyState = document.getElementById('resources-empty');
+    const resetBtn = document.getElementById('btn-reset-filters');
+
+    let currentCategory = 'all';
+    let currentZone = 'all';
+    let currentSearch = '';
+
+    const filterResources = () => {
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-category') || '';
+        const zone = card.getAttribute('data-zone') || '';
+        const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+        const title = (card.querySelector('.resource-name')?.textContent || '').toLowerCase();
+        const loc = (card.querySelector('.resource-location')?.textContent || '').toLowerCase();
+        const equip = (card.querySelector('.equip-desc')?.textContent || '').toLowerCase();
+
+        const matchCat = currentCategory === 'all' || cat === currentCategory;
+        const matchZone = currentZone === 'all' || zone === currentZone;
+        const matchSearch = !currentSearch || 
+          keywords.includes(currentSearch) || 
+          title.includes(currentSearch) || 
+          loc.includes(currentSearch) || 
+          equip.includes(currentSearch);
+
+        if (matchCat && matchZone && matchSearch) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (emptyState) {
+        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+    };
+
+    // Category chips
+    categoryChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        categoryChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        currentCategory = chip.getAttribute('data-category') || 'all';
+        filterResources();
+      });
+    });
+
+    // Zone select
+    if (zoneSelect) {
+      zoneSelect.addEventListener('change', (e) => {
+        currentZone = e.target.value;
+        filterResources();
+      });
+    }
+
+    // Search input with instant filtering
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        currentSearch = e.target.value.trim().toLowerCase();
+        filterResources();
+      });
+    }
+
+    // Reset filters
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        currentCategory = 'all';
+        currentZone = 'all';
+        currentSearch = '';
+        if (searchInput) searchInput.value = '';
+        if (zoneSelect) zoneSelect.value = 'all';
+        categoryChips.forEach(c => {
+          c.classList.toggle('active', c.getAttribute('data-category') === 'all');
+        });
+        filterResources();
+      });
+    }
+
+    // Route Guidance Modal
+    const routeModal = document.getElementById('route-modal');
+    const routeCloseBtn = document.getElementById('route-modal-close');
+    const routeDismissBtn = document.getElementById('route-modal-dismiss');
+    const routeTitle = document.getElementById('route-modal-title');
+    const routeLoc = document.getElementById('route-modal-loc');
+    const routeDist = document.getElementById('route-metric-dist');
+    const routeTime = document.getElementById('route-metric-time');
+    const routeInstruct = document.getElementById('route-modal-instruct');
+
+    const openRouteModal = (btn) => {
+      if (!routeModal) return;
+      const title = btn.getAttribute('data-title') || 'Resource Location';
+      const loc = btn.getAttribute('data-loc') || 'Campus Zone';
+      const dist = btn.getAttribute('data-dist') || '100m';
+      const time = btn.getAttribute('data-time') || '2 mins';
+      const instructions = btn.getAttribute('data-instructions') || 'Follow primary campus walkways.';
+
+      if (routeTitle) routeTitle.textContent = title;
+      if (routeLoc) routeLoc.textContent = loc;
+      if (routeDist) routeDist.textContent = dist;
+      if (routeTime) routeTime.textContent = time;
+      if (routeInstruct) routeInstruct.textContent = instructions;
+
+      routeModal.classList.add('open');
+      routeModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeRouteModal = () => {
+      if (!routeModal) return;
+      routeModal.classList.remove('open');
+      routeModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+
+    document.querySelectorAll('.btn-route-action').forEach(btn => {
+      btn.addEventListener('click', () => openRouteModal(btn));
+    });
+
+    if (routeCloseBtn) routeCloseBtn.addEventListener('click', closeRouteModal);
+    if (routeDismissBtn) routeDismissBtn.addEventListener('click', closeRouteModal);
+
+    if (routeModal) {
+      routeModal.addEventListener('click', (e) => {
+        if (e.target === routeModal) closeRouteModal();
+      });
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && routeModal && routeModal.classList.contains('open')) {
+        closeRouteModal();
+      }
+    });
+  }
+
+  initMobileNav() {
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const drawer = document.getElementById('mobile-nav-drawer');
+    const drawerLinks = document.querySelectorAll('.mobile-nav-link');
+
+    if (!menuBtn || !drawer) return;
+
+    const toggleDrawer = () => {
+      const isOpen = drawer.classList.contains('open');
+      if (isOpen) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    };
+
+    const openDrawer = () => {
+      drawer.classList.add('open');
+      drawer.setAttribute('aria-hidden', 'false');
+      menuBtn.classList.add('active');
+      menuBtn.setAttribute('aria-expanded', 'true');
+    };
+
+    const closeDrawer = () => {
+      drawer.classList.remove('open');
+      drawer.setAttribute('aria-hidden', 'true');
+      menuBtn.classList.remove('active');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    };
+
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleDrawer();
+    });
+
+    drawerLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        closeDrawer();
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (drawer.classList.contains('open') && !drawer.contains(e.target) && e.target !== menuBtn && !menuBtn.contains(e.target)) {
+        closeDrawer();
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) {
+        closeDrawer();
+      }
+    });
   }
 
   initSmoothScroll() {
